@@ -1,0 +1,666 @@
+@use '../utilities';
+
+.buscador {
+    height: 200px;
+    background-image: url(../imgs/logoBodyIndex.png);
+    background-repeat: no-repeat;
+    background-size: 175px;
+    background-position-y: 30px;
+    background-position-x: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+
+    img {
+        @include utilities.sizes (30px, 30px);
+        margin-right: 20px;
+        margin-top: 7.5px;
+        margin-bottom: 7.5px;
+    }
+}
+
+.buscador__barra {
+    @include utilities.sizes (40px, 490px);
+    border: none;
+    border-radius: 10px;
+    background-color: #F0F0F0;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 0.8rem;
+}
+
+.recetas {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h1 {
+        align-self: flex-start;
+        padding-bottom: 0.7%;
+    }
+}
+
+.recetas__cards {
+    height: 220px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+/* Cards Bootstrap */
+.card {
+    max-height: 70%;
+    max-width: 15%;
+    margin: 0%;
+    padding: 0%;
+    border: none;
+}
+
+.card-img-top {
+    min-height: 70%;
+    min-width: 100%;
+    object-fit: cover;
+    margin-bottom: -0.5rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.card-body {
+    max-height: 30%;
+    overflow-y: visible;
+    margin: 0%;
+    margin-top: 1rem;
+    padding: 0%;
+}
+
+.card-title {
+    max-height: 20%;
+    font-size: 0.975rem;
+    margin-bottom: 40px;
+}
+
+.card-text {
+    max-height: 80%;
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+/* -------------- */
+
+.categorias {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h2 {
+        align-self: flex-start;
+        padding-bottom: 0.7%;
+        text-align: start;
+    }
+}
+
+.categorias__row {
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-self: normal;
+}
+
+.categorias__card {
+    max-width: 9%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    img {
+        @include utilities.sizes (65%, 100%);
+        object-fit: cover;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+    }
+
+    p {
+        font-size: 0.75rem;
+    }
+}
+
+.app__ad {
+    max-width: 100%;
+    height: 280px;
+    background-color: rgba(0, 100, 90, 0.25);
+    margin-left: 70px;
+    margin-right: 70px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-image: url(../imgs/mockupsApp.png);
+    background-size: 240px;
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    background-position-y: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    h3 {
+        font-size: 2rem;
+        width: 50%;
+
+        strong {
+            font-weight: 800;
+            color: utilities.$color-primario;
+        }
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}
+
+.ad__downloadLogos {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.app__androidLogo {
+    height: 27.5px;
+    padding-right: 15px;
+}
+
+.app__iosLogo {
+    height: 27.5px;
+}
+
+.newsletter__noticia {
+    @include utilities.sizes (100%, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    img {
+        @include utilities.sizes (260px, 100%);
+        object-fit: cover;
+        margin-bottom: -26px;
+        border-radius: 15px;
+    }
+
+    div {
+        background-color: utilities.$color-blanco;
+        min-height: 80px;
+        width: 85%;
+        border: 0.012rem solid #b6b6b6;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        box-shadow: 0rem 1.25rem 1.25rem -1.6rem rgb(88, 88, 88);
+
+        hr {
+            @include utilities.sizes (1px, 47px);
+            margin: 0 auto;
+        }
+    }
+}
+
+.descripcion__titulo {
+    color: utilities.$color-secundario;
+    font-style: italic;
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+    font-size: 1rem;
+}
+
+
+.descripcion__autor {
+    margin: 0 auto;
+    color: utilities.$color-primario;
+    font-size: 0.675rem;
+}
+
+.newsletter__noticia--aside {
+    @include utilities.sizes (675px, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    article {
+        @include utilities.sizes (100px, 100%);
+        display: flex;
+        align-items: flex-start;
+
+        img {
+            height: 80%;
+            min-width: 40%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        div {
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            hr {
+                margin-left: 25px;
+                width: 47px;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.descripcionA__titulo {
+    color: rgba(0, 100, 90, 1);
+    font-style: italic;
+    font-size: 0.775rem;
+    padding-left: 25px;
+    margin-bottom: 0;
+}
+
+.descripcionA__autor {
+    color: rgba(230, 87, 44, 1);
+    font-size: 0.7rem;
+    padding-left: 25px;
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 320px) and (max-width: 431px) {
+    .buscador {
+        scale: 80%;
+    }
+
+    .buscador__barra {
+        width: 80%;
+    }
+
+    .recetas {
+        min-height: 700px;
+        min-width: 30%;
+        max-width: 100%;
+
+        h1 {
+            font-size: 0.85rem;
+        }
+    }
+
+    .recetas__cards {
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .card {
+        max-height: 130px;
+        min-width: 33%;
+        max-width: 45%;
+    }
+
+    .card-img-top {
+        height: 40%;
+    }
+
+    .card-body {
+        max-height: 70%;
+    }
+
+    .card-title {
+        margin-bottom: 0px;
+        font-size: 0.85rem;
+    }
+
+    .card-text {
+        margin-top: 0.5rem;
+        font-size: 0.625rem;
+    }
+
+    .categorias {
+        min-height: 800px;
+        min-width: 320px;
+        max-width: 431px;
+
+        h2 {
+            font-size: 0.9rem;
+        }
+    }
+
+    .categorias__row {
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .categorias__card {
+        max-height: 60px;
+        max-width: 48%;
+
+        p {
+            font-size: 0.75rem;
+        }
+    }
+
+    .app__ad {
+        height: 300;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-size: 30%;
+
+        h3 {
+            font-size: 1.2rem;
+            width: 60%;
+        }
+
+        p {
+            font-size: 0.7rem;
+        }
+    }
+
+    .newsletter__noticia {
+        padding-right: 10px;
+    }
+
+    .newsletter__noticia--aside {
+        padding-left: 10px;
+    }
+
+}
+
+@media screen and (min-width: 432px) and (max-width: 566px) {
+    .buscador__barra {
+        width: 70%;
+    }
+
+    .recetas {
+        min-height: 625px;
+        min-width: 30%;
+        max-width: 100%;
+
+        h1 {
+            font-size: 0.9rem;
+        }
+    }
+
+    .recetas__cards {
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .card {
+        max-height: 150px;
+        min-width: 33%;
+        max-width: 45%;
+    }
+
+    .card-img-top {
+        height: 40%;
+    }
+
+    .card-body {
+        max-height: 70%;
+    }
+
+    .card-title {
+        margin-bottom: 0px;
+        font-size: 0.85rem;
+    }
+
+    .card-text {
+        margin-top: 0.5rem;
+        font-size: 0.575rem;
+    }
+
+    .categorias {
+        min-height: 420px;
+        min-width: 432px;
+        max-width: 566px;
+
+        h2 {
+            font-size: 0.9rem;
+        }
+    }
+
+
+    .categorias__row {
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .categorias__card {
+        max-height: 100px;
+        max-width: 19%;
+
+        p {
+            font-size: 0.675rem;
+        }
+    }
+
+    .app__ad {
+        height: 300;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-size: 30%;
+
+        h3 {
+            font-size: 1.2rem;
+            width: 60%;
+        }
+
+        p {
+            font-size: 0.7rem;
+        }
+    }
+
+    .newsletter__noticia {
+        padding-right: 10px;
+    }
+
+    .newsletter__noticia--aside {
+        padding-left: 10px;
+    }
+
+}
+
+@media screen and (min-width: 567px) and (max-width: 767px) {
+    .recetas {
+        height: 550px;
+        min-width: 576px;
+        max-width: 739px;
+    }
+
+    .recetas__cards {
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .card {
+        max-height: 200px;
+        min-width: 180px;
+    }
+
+    .card-img-top {
+        height: 40%;
+    }
+
+    .card-body {
+        max-height: 70%;
+    }
+
+    .card-title {
+        margin-bottom: 0px;
+    }
+
+    .card-text {
+        margin-top: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .categorias {
+        min-height: 420px;
+        min-width: 576px;
+        max-width: 739px;
+    }
+
+    .categorias__row {
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .categorias__card {
+        max-height: 100px;
+        max-width: 19%;
+    }
+
+    .app__ad {
+        height: 300;
+        margin-left: 10px;
+        margin-right: 10px;
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-size: 0.775rem;
+        }
+    }
+
+    .newsletter__noticia {
+        padding-right: 10px;
+    }
+
+    .newsletter__noticia--aside {
+        padding-left: 10px;
+    }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .recetas {
+        height: 510px;
+        min-width: 768px;
+        max-width: 979px;
+    }
+
+    .recetas__cards {
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .card {
+        max-height: 200px;
+        min-width: 235px;
+    }
+
+    .card-img-top {
+        height: 40%;
+    }
+
+    .card-body {
+        max-height: 70%;
+    }
+
+    .card-title {
+        margin-bottom: 0px;
+    }
+
+    .card-text {
+        margin-top: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .categorias {
+        height: 400px;
+        min-width: 768px;
+        max-width: 1023px;
+    }
+
+    .categorias__row {
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .categorias__card {
+        max-height: 80px;
+        max-width: 18%;
+
+        img {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .app__ad {
+        height: 90%;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .descripcion__titulo {
+        font-size: 0.9rem;
+    }
+
+    .descripcion__autor {
+        font-size: 0.6.75rem;
+    }
+
+    .descripcionA__titulo {
+        font-size: 0.675rem;
+    }
+
+    .descripcionA__autor {
+        font-size: 0.6rem;
+    }
+
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+    .recetas {
+        height: 230px;
+    }
+
+    .recetas__cards {
+        height: 100%;
+    }
+
+    .card {
+        max-height: 150px;
+        min-width: 15.5%;
+    }
+
+    .card-img-top {
+        height: 40%;
+    }
+
+    .card-body {
+        max-height: 10%;
+    }
+
+    .card-title {
+        font-size: 0.875rem;
+        margin-bottom: 1.4rem;
+    }
+
+    .card-text {
+        font-size: 0.675rem;
+        width: 100%;
+    }
+
+    .app__ad {
+        height: 90%;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+}
