@@ -673,6 +673,14 @@
   margin-bottom: 7.5px;
 }
 
+.buscador__index {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .buscador__barra, .buscador__barra--recetas {
   height: 40px;
   width: 490px;
@@ -699,7 +707,15 @@
 .recetas__cards {
   height: 220px;
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#resBuscador {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 

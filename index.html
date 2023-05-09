@@ -44,91 +44,31 @@
                 </ol>
             </nav>
         </header>
-        <section class="buscador grid__buscador"><!-- Buscador -->
-            <img src="./imgs/iconoBuscador.png" alt="Lupa de busqueda">
-            <input class="buscador__barra" class="robotoRegular" type="search" name="buscadorRecetasIndex"
-                placeholder="Buscá recetas, ingredientes o chefs">
+        <section class="buscador__index grid__buscador"><!-- Buscador -->
+            <div class="buscador">
+                <img src="./imgs/iconoBuscador.png" alt="Lupa de busqueda">
+                <input class="buscador__barra robotoRegular" id="buscadorIndex" type="search"
+                    name="buscadorRecetasIndex" placeholder="Buscá tus viandas favoritas!">
+                <button id="botonBuscador">Buscar ahora!</button>
+            </div>
+            <div id="resBuscador"></div>
         </section>
         <section class="recetas grid__recetas grid__padding--left grid__padding--right">
             <!-- Seccion recetas destacadas -->
-            <h1 class="robotoBold">¡Inspirate con las recetas más populares de la semana!</h1>
-            <article class="recetas__cards">
-                <div class="card scale">
-                    <img src="https://i2.wp.com/sabordelobueno.com/wp-content/uploads/2021/06/curry-garbanzos-atomatado.jpg?resize=750%2C500&ssl=1"
-                        class="card-img-top" alt="Plato de Curry con Garbanzos">
-                    <div class="card-body">
-                        <p class="card-title robotoBold">Curry de Garbanzos</p>
-                        <p class="card-text robotoRegular">La receta más rica para hacer un curry de garbanzos fácil,
-                            perfecta para darle un toque diferente a los potajes de siempre.</p>
-                        <button id="botonAddCarrito">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
-                                alt="Agregar al carrito"></button>
-                    </div>
-                </div>
-                <div class="card scale">
-                    <img src="https://cocinalocal.cl/wp-content/uploads/2021/08/pastel-de-papas.jpg"
-                        class="card-img-top" alt="Pastel de papas">
-                    <div class="card-body">
-                        <p class="card-title robotoBold">Pastel de Papas</p>
-                        <p class="card-text robotoRegular">Un plato ideal para invitar amigos o familia y
-                            teletrasportarlos a la niñez. Un clásico que nunca falla.</p>
-                        <button id="botonAddCarrito">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
-                                alt="Agregar al carrito"></button>
-                    </div>
-                </div>
-                <div class="card scale">
-                    <img src="https://i1.wp.com/irecetasfaciles.com/wp-content/uploads/2020/10/Ratatouille.jpg?fit=1280%2C720&ssl=1"
-                        class="card-img-top" alt="Ratatouille">
-                    <div class="card-body">
-                        <p class="card-title robotoBold">Ratatouille</p>
-                        <p class="card-text robotoRegular">No solo se trata de un plato delicioso sino que además
-                            también queda muy bonito en la mesa.</p>
-                        <button id="botonAddCarrito">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
-                                alt="Agregar al carrito"></button>
-                    </div>
-                </div>
-                <div class="card scale">
-                    <img src="https://cdn0.recetasgratis.net/es/posts/7/1/5/panqueques_con_dulce_de_leche_filloas_dulces_60517_orig.jpg"
-                        class="card-img-top" alt="Panqueques Rellenos">
-                    <div class="card-body">
-                        <p class="card-title robotoBold">Panqueques Rellenos</p>
-                        <p class="card-text robotoRegular">Panqueques rellenos de dulce de leche, crema, o lo que
-                            quieras! Uno de mis postres favoritos.</p>
-                        <button id="botonAddCarrito">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
-                                alt="Agregar al carrito"></button>
-                    </div>
-                </div>
-                <div class="card scale">
-                    <img src="https://www.recetasnestle.com.ar/sites/default/files/srh_recipes/412a621fff614c3adfaf97fd6a1b3b8c.jpg"
-                        class="card-img-top" alt="Tarta de Espinaca">
-                    <div class="card-body">
-                        <p class="card-title robotoBold">Tarta de Espinaca</p>
-                        <p class="card-text robotoRegular">Tarta de espinaca con base de papa - para ponerle onda! Una
-                            vez que la probás así, las tartas nunca serán lo mismo!</p>
-                        <button id="botonAddCarrito">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
-                                alt="Agregar al carrito"></button>
-                    </div>
-                </div>
-                <div class="card scale">
-                    <img src="https://www.nomecomesnada.es/wp-content/uploads/ngg_featured/%C3%B1oquis-6-web.jpg"
-                        class="card-img-top" alt="Gnocchis Caseros">
-                    <div class="card-body">
-                        <p class="card-title robotoBold">Gnocchis Caseros</p>
-                        <p class="card-text robotoRegular">Gnocchis de papa, zapallo, o lo que gustes. Hoy les comparto
-                            una receta familiar para que el 29 queden como unos profesionales!</p>
-                        <button id="botonAddCarrito">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
-                                alt="Agregar al carrito"></button>
-                    </div>
-                </div>
+            <h1 class="robotoBold">¡Elegí entre las viandas más populares de esta semana!</h1>
+            <article class="recetas__cards cardsViandas" id="product">
             </article>
         </section>
         <section class="grid__carritoIndex grid__padding--left grid__padding--right"> <!-- Carrito interactivo -->
-            <div class="container">
+            <div class="carrito">
                 <h4>Tu Carrito</h4>
                 <em>Tus productos seleccionados...</em>.
-                <div class="container-cart">
-                    <h5 class="card-title">Producto C</h5>
-                    <p class="card-text">Precio: </p>
-                    <button type="button" class="btn btn-outline-primary">Eliminar</button>
+                <div class="container-cart" id="carritoActivo">
+                </div>
+                <div id="carritoPrecio">
+                </div>
+                <div>
+                    <button type="button" id="carritoEmpty" class="btn btn-outline-primary">Vaciar Carrito</button>
                 </div>
             </div>
         </section>
@@ -362,7 +302,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-    <!--     <script src="./app.js"></script> -->
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

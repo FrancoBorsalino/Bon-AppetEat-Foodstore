@@ -21,6 +21,15 @@
     }
 }
 
+.buscador__index {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .buscador__barra {
     @include utilities.sizes (40px, 490px);
     border: none;
@@ -46,7 +55,15 @@
 .recetas__cards {
     height: 220px;
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#resBuscador {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
