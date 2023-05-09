@@ -79,8 +79,8 @@
   column-gap: 3%;
   row-gap: 20%;
   grid-template-columns: 1.4fr 1fr;
-  grid-template-rows: 0.25fr 0.85fr repeat(2, 2fr) 1.4fr repeat(2, 1.6fr) 0.6fr;
-  grid-template-areas: "header header" "section-buscador section-buscador" "section-recetas section-recetas" "section-categorias section-categorias" "section-app section-app" "section-newsUno section-newsAside" "section-newsDos section-newsAside" "footer footer";
+  grid-template-rows: 0.25fr 0.85fr repeat(4, 2fr) 1.4fr repeat(2, 1.6fr) 0.6fr;
+  grid-template-areas: "header header" "section-buscador section-buscador" "section-recetas section-recetas" "section-carritoIndex section-carritoIndex" "section-formEntrega section-formEntrega" "section-categorias section-categorias" "section-app section-app" "section-newsUno section-newsAside" "section-newsDos section-newsAside" "footer footer";
 }
 
 .main__grid--recetas {
@@ -130,6 +130,14 @@
 
 .grid__recetas {
   grid-area: section-recetas;
+}
+
+.grid__carritoIndex {
+  grid-area: section-carritoIndex;
+}
+
+.grid__formEntrega {
+  grid-area: section-formEntrega;
 }
 
 .grid__categorias {
@@ -934,6 +942,18 @@
 }
 #botonAddCarrito img {
   width: 20px;
+}
+
+.boton__formEntrega {
+  margin-top: 20px;
+}
+
+.container-cart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+  margin: 1rem;
 }
 
 @media screen and (min-width: 320px) and (max-width: 431px) {

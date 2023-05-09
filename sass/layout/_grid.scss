@@ -4,11 +4,13 @@
     @include utilities.grid_base;
     @include utilities.grid_gaps;
     grid-template-columns: 1.4fr 1fr;
-    grid-template-rows: 0.25fr 0.85fr repeat(2, 2fr) 1.4fr repeat(2, 1.6fr) 0.6fr;
+    grid-template-rows: 0.25fr 0.85fr repeat(4, 2fr) 1.4fr repeat(2, 1.6fr) 0.6fr;
     grid-template-areas:
         "header header"
         "section-buscador section-buscador"
         "section-recetas section-recetas"
+        "section-carritoIndex section-carritoIndex"
+        "section-formEntrega section-formEntrega"
         "section-categorias section-categorias"
         "section-app section-app"
         "section-newsUno section-newsAside"
@@ -79,6 +81,14 @@
 
 .grid__recetas {
     grid-area: section-recetas;
+}
+
+.grid__carritoIndex {
+    grid-area: section-carritoIndex;
+}
+
+.grid__formEntrega {
+    grid-area: section-formEntrega;
 }
 
 .grid__categorias {
