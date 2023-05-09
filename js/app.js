@@ -87,6 +87,14 @@ buttonSearch.addEventListener('click', function(event) {
         document.querySelector(".cardsViandas").innerHTML = '';
         document.querySelector(".cardsViandas").appendChild(returnSearch)
             }
+        
+        /* IMPORTANTE! Antes no tenía esto, y lo tuve que volver a declarar para que pueda agregar al carrito desde los resultados de la búsqueda. Capaz queda repetitivo o algo hice mal, pero fue la única manera que encontre. Mi razonamiento es que si asigno esta funcion por fuera, en realidad el evento se ejecuta ANTES de lo que el DOM genera el botón del resultado de la búsqueda. Por eso lo terminé asignando aqui tambien */
+        /* Lo otro que me queda resolver, es que no se están asignando correctamente los elementos cuando los sumo en el carrito. Me imagino que tiene que ver con que no está correspondiendo el index con el listado del array de resultado de la busqueda. Pero no me dio ni la cabeza ni el tiempo para encontrarle una solución para esta entrega :( */
+        document.querySelectorAll('.add').forEach((button, index)=> {
+            button.addEventListener ('click',()=> {
+            addVianda(viandasDisponibles[index]);
+            })
+        });
     }
 });
 
