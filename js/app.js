@@ -1,4 +1,5 @@
-// Declaración de variables globales, objetos y arrays sobre viandas e-commerce
+/* SEGUNDA ENTREGA CORREGIDA */
+
 let totalPrecio = 0;
 
 function Viandas (nombre, porciones, categoria, precio, tipo) {
@@ -18,11 +19,78 @@ const fideosTuco = new Viandas("Fideos con Tuco", 3, "Guisos y pastas", 12400, "
 
 const viandasDisponibles = [curryGarbanzos, polloArroz, milaPure, sandVege, bifeEnsalada, fideosTuco];
 
+//Declaracion de información del usuario
+let nombreUsuario = prompt("Bienvenido a la Foodstore de Bon AppetEat!\nIngrese su nombre");
+while (nombreUsuario === "") {
+    nombreUsuario = prompt("No se cargó ningun nombre. Por favor, ingrese su nombre.")
+}
+    let direccionUsuario = prompt(`Hola ${nombreUsuario}! Por favor, compartinos una dirección de entrega`);
+while (direccionUsuario === "") {
+    direccionUsuario = prompt("No se cargo ninguna direccion. Por favor, ingrese una dirección de entrega.")
+}
+console.log(`Nombre ingresado: ${nombreUsuario}.\nDirección ingresada: ${direccionUsuario}.`)
+confirmacionUsuario();
 
+//La primera funcion define la información del usuario
+function confirmacionUsuario() {
+    let confirmarDatos = prompt("Bienvenido " + nombreUsuario + "!\nEstaremos entregando tu mercadería a la dirección: " + direccionUsuario + "!\nSon estos datos correctos?");
+    if (confirmarDatos != ""){
+        switch (confirmarDatos){
+            case "SI":
+            case "Si":
+            case "si":
+                cantidadProducto()
+                break;
+            case "NO":
+            case "No":
+            case "no":
+                location.reload()
+                break;
+            default:
+                alert("Por favor, ingresar una respuesta por si o no")
+                confirmacionUsuario()
+                break;
+        }
+    } else {
+        alert("No ha ingresado ninguna respuesta.")
+        confirmacionUsuario()
+    }
+}
+
+
+
+
+
+
+
+
+
+
+// Declaración de variables globales, objetos y arrays sobre viandas e-commerce
+/* let totalPrecio = 0;
+
+function Viandas (nombre, porciones, categoria, precio, tipo) {
+    this.nombre = nombre;
+    this.porciones = porciones;
+    this.categoria = categoria;
+    this.precio = precio;
+    this.tipo = tipo;
+}
+
+const curryGarbanzos = new Viandas("Curry de Garbanzos", 5, "Guisos y pastas", 16700, "Vegano, Vegetariano");
+const polloArroz = new Viandas("Pollo con Arroz", 4, "Minutas", 13200, "Con carne");
+const milaPure = new Viandas("Milanesa con Pure", 4, "Minutas", 18300,"Con carne");
+const sandVege = new Viandas("Sandwich Vegano", 6, "Sandwiches", 14900, "Vegano, Vegetariano");
+const bifeEnsalada = new Viandas("Bife con Ensalada", 4, "Minutas", 1710, "Con carne");
+const fideosTuco = new Viandas("Fideos con Tuco", 3, "Guisos y pastas", 12400, "Vegetariano");
+
+const viandasDisponibles = [curryGarbanzos, polloArroz, milaPure, sandVege, bifeEnsalada, fideosTuco]; */
+
+/* SEGUNDA ENTREGA - ANTES DE LA CORRECCIÓN */
 
 /* Declaración de cards de viandas según arrays */
 
-for (let vianda of viandasDisponibles){
+/* for (let vianda of viandasDisponibles){
     let elemento = document.createElement ("div")
     elemento.innerHTML =
     `
@@ -40,12 +108,12 @@ for (let vianda of viandasDisponibles){
 
     document.querySelector(".cardsViandas").appendChild(elemento)
 
-}
+} */
 
 
 /* Funcionamiento del buscador */
 
-const inputSearch = document.getElementById('buscadorIndex');
+/* const inputSearch = document.getElementById('buscadorIndex');
 const buttonSearch = document.getElementById('botonBuscador');
 const returnSearch = document.getElementById('resBuscador');
 
@@ -86,27 +154,27 @@ buttonSearch.addEventListener('click', function(event) {
 
         document.querySelector(".cardsViandas").innerHTML = '';
         document.querySelector(".cardsViandas").appendChild(returnSearch)
-            }
+            } */
         
         /* IMPORTANTE! Antes no tenía esto, y lo tuve que volver a declarar para que pueda agregar al carrito desde los resultados de la búsqueda. Capaz queda repetitivo o algo hice mal, pero fue la única manera que encontre. Mi razonamiento es que si asigno esta funcion por fuera, en realidad el evento se ejecuta ANTES de lo que el DOM genera el botón del resultado de la búsqueda. Por eso lo terminé asignando aqui tambien */
         /* Lo otro que me queda resolver, es que no se están asignando correctamente los elementos cuando los sumo en el carrito. Me imagino que tiene que ver con que no está correspondiendo el index con el listado del array de resultado de la busqueda. Pero no me dio ni la cabeza ni el tiempo para encontrarle una solución para esta entrega :( */
-        document.querySelectorAll('.add').forEach((button, index)=> {
+/*         document.querySelectorAll('.add').forEach((button, index)=> {
             button.addEventListener ('click',()=> {
             addVianda(viandasDisponibles[index]);
             })
         });
     }
-});
+}); */
 
 
 /* Declaración del carrito + metodos */
-const carrito = []
+/* const carrito = []
 
 const carritoElemento = document.querySelector("#carritoActivo");
-const totalPrecioElemento = document.querySelector("#carritoPrecio");
+const totalPrecioElemento = document.querySelector("#carritoPrecio"); */
 
 /* Push de un elemento al carrito */
-document.querySelectorAll('.add').forEach((button, index)=> {
+/* document.querySelectorAll('.add').forEach((button, index)=> {
     button.addEventListener ('click',()=> {
         addVianda(viandasDisponibles[index]);
     })
@@ -139,35 +207,31 @@ document.querySelectorAll('.delete__carrito').forEach((button, index) => {
             deleteCarrito(index);
         });
     });
-}
+} */
 
 /* Vaciado del carrito */
 
-document.getElementById('carritoEmpty').addEventListener('click', function() {
+/* document.getElementById('carritoEmpty').addEventListener('click', function() {
     carrito.splice(0, carrito.length);
     document.getElementById('carritoActivo').innerHTML = '';
     document.getElementById('carritoPrecio').innerHTML = '';
-    });
+    }); */
 
 
 /* Borrar un elemento del carrito*/
-function deleteCarrito(index) {
+/* function deleteCarrito(index) {
     const item = carrito[index];
     totalPrecio -= item.precio;
     carrito.splice(index, 1);
     refreshCarrito();
 }
-
-
-
-
-
-
+ */
 
 
 /* filtros que no se me ocurrió como aplicarlo en el HTML, pero que dejo el código de cómo funcionaria */
+/* Ver la posibilidad de agregar botones que se activen y desactiven? o algun desplegable? No se bien como hacer eso en java */
 
-let filterPrecio = viandasDisponibles.filter ((item)=> item.precio >= 15000);
+/* let filterPrecio = viandasDisponibles.filter ((item)=> item.precio >= 15000);
 let filterVeggie = viandasDisponibles.filter ((item)=> item.tipo === "Vegetariano" || item.tipo === "Vegano, Vegetariano");
 let filterVegan = viandasDisponibles.filter ((item)=> item.tipo === "Vegano");
-let filterMeat = viandasDisponibles.filter ((item)=> item.tipo === "Con Carne");
+let filterMeat = viandasDisponibles.filter ((item)=> item.tipo === "Con Carne"); */
