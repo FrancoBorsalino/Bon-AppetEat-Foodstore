@@ -1,6 +1,8 @@
 /* Declaración de variables globales, objetos y arrays */
 let totalPrecio = 0;
-
+let nombreUsuario;
+let direccionUsuario;
+let emailUsuario;
 const carritoCompra = [];
 
 const viandasDisponibles = [
@@ -18,7 +20,7 @@ const viandasDisponibles = [
     porciones: 4,
     categoria: "Minutas",
     precio: 13200,
-    tipo: "con carne",
+    tipo: "carne",
   },
   {
     id: 3,
@@ -26,7 +28,7 @@ const viandasDisponibles = [
     porciones: 4,
     categoria: "Minutas",
     precio: 18300,
-    tipo: "con carne",
+    tipo: "carne",
   },
   {
     id: 4,
@@ -42,7 +44,7 @@ const viandasDisponibles = [
     porciones: 4,
     categoria: "Minutas",
     precio: 1710,
-    tipo: "con carne",
+    tipo: "carne",
   },
   {
     id: 6,
@@ -55,30 +57,32 @@ const viandasDisponibles = [
 ];
 
 /* Inputs de Usuario para declarar variables de información de usuario */
-let nombreUsuario = prompt(
-  "Bienvenido a la Foodstore de Bon AppetEat!\nIngrese su nombre"
-);
-while (nombreUsuario === "" || nombreUsuario === " ") {
-  nombreUsuario = prompt(
-    "No se cargó ningun nombre. Por favor, ingrese su nombre."
+function inputUsuario() {
+  let nombreUsuario = prompt(
+    "Bienvenido a la Foodstore de Bon AppetEat!\nIngrese su nombre"
   );
+  while (nombreUsuario === "" || nombreUsuario === " ") {
+    nombreUsuario = prompt(
+      "No se cargó ningun nombre. Por favor, ingrese su nombre."
+    );
+  }
+  let direccionUsuario = prompt(
+    `Hola ${nombreUsuario}! Por favor, compartinos una dirección de entrega`
+  );
+  while (direccionUsuario === "" || direccionUsuario === " ") {
+    direccionUsuario = prompt(
+      "No se cargo ninguna direccion. Por favor, ingrese una dirección de entrega."
+    );
+  }
+  let emailUsuario = prompt(
+    `Gracias ${nombreUsuario}! Por último, te pedimos una direccion de e-mail para coordinar la entrega.`
+  );
+  while (emailUsuario === "" || emailUsuario === " ")
+    console.log(
+      `Nombre ingresado: ${nombreUsuario}.\nDirección ingresada: ${direccionUsuario}.\nDirección de e-mail: ${emailUsuario}.`
+    );
+  confirmacionUsuario();
 }
-let direccionUsuario = prompt(
-  `Hola ${nombreUsuario}! Por favor, compartinos una dirección de entrega`
-);
-while (direccionUsuario === "" || direccionUsuario === " ") {
-  direccionUsuario = prompt(
-    "No se cargo ninguna direccion. Por favor, ingrese una dirección de entrega."
-  );
-}
-let emailUsuario = prompt(
-  `Gracias ${nombreUsuario}! Por último, te pedimos una direccion de e-mail para coordinar la entrega.`
-);
-while (emailUsuario === "" || emailUsuario === " ")
-  console.log(
-    `Nombre ingresado: ${nombreUsuario}.\nDirección ingresada: ${direccionUsuario}.\nDirección de e-mail: ${emailUsuario}.`
-  );
-confirmacionUsuario();
 
 /* Declaracion de funcion para confirmar la información de usuario */
 function confirmacionUsuario() {
@@ -101,7 +105,7 @@ function confirmacionUsuario() {
       case "NO":
       case "No":
       case "no":
-        location.reload();
+        inputUsuario();
         break;
       default:
         alert("Por favor, ingresar una respuesta por si o no");
@@ -130,27 +134,7 @@ function navegadorApp() {
         alert("Esto te lleva a la seccion CARRITO");
         break;
       case 3:
-        let confirmReload = prompt(
-          "Modificar los datos requiere comenzar nuevamente con la compra.\nEstá seguro que quiere hacerlo? Responda con si o no."
-        );
-        if (confirmReload != "") {
-          switch (confirmReload) {
-            case "Si":
-            case "SI":
-            case "si":
-              location.reload();
-              break;
-            case "No":
-            case "NO":
-            case "no":
-              navegadorApp();
-              break;
-            default:
-              alert("No es una respuesta correcta.");
-              navegadorApp();
-              break;
-          }
-        }
+        inputUsuario();
         break;
       default:
         alert("Por favor, ingresa el número de alguna de las opciones!");
@@ -196,21 +180,19 @@ function navegadorCompra() {
 }
 
 // Mostrar la tienda virtual (1)
-// Acá tengo que mostrar en la consola los productos que están disponibles. Para eso tengo que llamar la info del Array y armar un listado ordenado
 function mostrarViandas() {
   // Metodo muy simple de mostrar viandas llamando con un forEach cada elemento del Array e interpretandolo en un console.log
   console.log("Estas son las viandas disponibles:\n");
-  viandasDisponibles.forEach((vianda, indice) => {
+  viandasDisponibles.forEach((vianda) => {
     console.log(
       `Vianda nro. ${vianda.id} - ${vianda.nombre}: Rinde ${vianda.porciones} porciones, con un valor de $${vianda.precio}. Tené en cuenta que esta vianda es para dieta tipo ${vianda.tipo}.`
     );
   });
   alert("Las viandas se han mostrado en la consola!");
-  /* LLEVAR A AGREGAR A CARRITO */
+  agregarAlCarrito();
 }
 
 // Buscador (2)
-// DEARMAR BIEN EL BUSCADOR PARA VER CÓMO ESTÁ FUNCIONANDO
 function buscarPorTexto() {
   const inputBusqueda = prompt("Escriba una palabra que desee buscar:"); //Input de usuario para la busqueda
   const inputBusquedaTLC = inputBusqueda.toLowerCase(); // Modifico esta variable a lower case
@@ -249,20 +231,177 @@ function buscarPorTexto() {
       );
     }
     alert("Los resultados se han mostrado en la consola!");
-    /* LLEVAR A AGREGAR A CARRITO */
+    agregarAlCarrito();
   }
 }
 
 // Filtros (3)
+/* FALTA ESTA! */
 
 // Sumar al carrito (futuro boton)
+function agregarAlCarrito() {
+  const addVerificar = prompt(
+    "Desea agregar alguna vianda al carrito?\nResponda con si o no."
+  );
+  if (addVerificar != "") {
+    switch (addVerificar) {
+      case "No":
+      case "NO":
+      case "no":
+        alert("Entendido! en ese caso volveremos al menu de viandas.");
+        navegadorCompra();
+        break;
+      case "Si":
+      case "SI":
+      case "si":
+        const addId = Number(
+          prompt(
+            "Genial! En ese caso escriba el NRO de Vianda que quiera agregar al carrito.\nSi lo desconoce recuerde que puede ver nuestro listado, utilizar nuestro buscado o filtros!"
+          )
+        );
+        const resultados = [];
+        for (let i = 0; i < viandasDisponibles.length; i++) {
+          const vianda = viandasDisponibles[i];
+          const info = Object.values(vianda);
+          for (let j = 0; j < info.length; j++) {
+            const infoDos = info[j];
+            if (infoDos === addId) {
+              resultados.push(vianda);
+            }
+          }
+        }
+        if (resultados.length === 0 || addId === "" || addId === " ") {
+          alert(
+            `Disculpanos! No logramos encontrar ninguna vianda que coincida con el NRO ${addId}. Intenta nuevamente con alguna otra palabra clave!`
+          );
+          agregarAlCarrito();
+        } else {
+          console.log("Hemos agregado la siguiente vianda a tu carrito:");
+          for (let i = 0; i < resultados.length; i++) {
+            const coincidencia = resultados[i];
+            carritoCompra.push(coincidencia);
+            totalPrecio += coincidencia.precio;
+            console.log(
+              `Vianda nro. ${coincidencia.id} - ${coincidencia.nombre}: Rinde ${coincidencia.porciones} porciones, con un valor de $${coincidencia.precio}.`
+            );
+            console.log(
+              "El valor total de tu cuenta hasta ahora es de: $" + totalPrecio
+            );
+            alert("Hemos agregado la vianda al carrito!");
+            const deshacer = prompt(
+              "Querés deshacer haber agregado esta vianda al carrito?\nResponde con si o no."
+            );
+            if (deshacer != "") {
+              switch (deshacer) {
+                case "No":
+                case "NO":
+                case "no":
+                  alert("Entendido!");
+                  agregarAlCarrito();
+                  break;
+                case "Si":
+                case "SI":
+                case "si":
+                  carritoCompra.shift();
+                  totalPrecio -= coincidencia.precio;
+                  console.log(
+                    "El valor total de tu cuenta hasta ahora es de: $" +
+                      totalPrecio
+                  );
+                  alert("Se ha borrado este item!");
+                  agregarAlCarrito();
+                  break;
+                default:
+                  alert("Por favor, ingresar una respuesta por si o no");
+                  deshacerAdd();
+                  break;
+              }
+            }
+          }
+        }
+        break;
+      default:
+        alert("Por favor, ingresar una respuesta por si o no");
+        agregarAlCarrito();
+        break;
+    }
+  } else {
+    alert("No ha ingresado ninguna respuesta.");
+    agregarAlCarrito();
+  }
+}
 
 /* SECCION CARRITO - Funciones y metodos para visualizar y modificar el carrito */
+function navegadorCarrito() {
+  let opcionNav = Number(
+    prompt(
+      "MENU CARRITO\nA continuación, selecciona la opción de lo que quieras hacer:\n1 - Mostrar mi carrito\n2 - Vaciar mi carrito\n3 - Finalizar mi compra\n4 - Volver al menú principal"
+    )
+  );
+  if (opcionNav != "") {
+    switch (opcionNav) {
+      case 1:
+        mostrarCarrito();
+        break;
+      case 2:
+        vaciarCarrito();
+        break;
+      case 3:
+        finalizarCompra();
+        break;
+      case 4:
+        navegadorApp();
+        break;
+      default:
+        alert("Por favor, ingresa el número de alguna de las opciones!");
+        navegadorApp();
+        break;
+    }
+  } else {
+    alert("No ha ingresado ninguna respuesta.");
+    navegadorCarrito();
+  }
+}
 
 // Mostrar carrito
-
-// Borrar elementos
+/* FALTA ESTA! function mostrarCarrito() {} */
 
 // Vaciar carrito
+function vaciarCarrito() {
+  carritoCompras.splice(0, carritoCompras.length);
+  totalPrecio = 0;
+  alert("Se ha vaciado el carrito!");
+  console.log("El valor total de tu cuenta se ha revertido a: $" + totalPrecio);
+  navegadorCompra();
+}
 
 // Finalizar compra
+function finalizarCompra() {
+  let ventaFinal = prompt(
+    `${nombreUsuario} deseas comprar tus productos por un total de ${totalPrecio} para ser enviadas a ${direccionUsuario}?\nPor favor, responde por si o no.`
+  );
+  if (ventaFinal != "") {
+    switch (ventaFinal) {
+      case "Si":
+      case "SI":
+      case "si":
+        alert(
+          `Perfecto! Nos estaremos contactando contigo a tu dirección de e-mail ${emailUsuario} para coordinar el pago y la entrega.\nMuchas gracias por usar Bon AppetEat!`
+        );
+        break;
+      case "No":
+      case "NO":
+      case "no":
+        alert("En ese caso, volvamos al menu principal!");
+        navegadorApp();
+        break;
+      default:
+        alert("Por favor, ingresar una respuesta por si o no.");
+        finalizarCompra();
+        break;
+    }
+  } else {
+    alert("No ha ingresado ninguna respuesta");
+    finalizarCompra();
+  }
+}
