@@ -10,7 +10,6 @@ const viandasDisponibles = [
     id: 1,
     nombre: "Curry con Garbanzos",
     porciones: 5,
-    categoria: "Guisos y pastas",
     precio: 16700,
     tipo: "vegano, vegetariano",
   },
@@ -18,7 +17,6 @@ const viandasDisponibles = [
     id: 2,
     nombre: "Pollo con Arroz",
     porciones: 4,
-    categoria: "Minutas",
     precio: 13200,
     tipo: "carne",
   },
@@ -26,7 +24,6 @@ const viandasDisponibles = [
     id: 3,
     nombre: "Milanesa con Pure",
     porciones: 4,
-    categoria: "Minutas",
     precio: 18300,
     tipo: "carne",
   },
@@ -34,7 +31,6 @@ const viandasDisponibles = [
     id: 4,
     nombre: "Sandwich Vegano",
     porciones: 6,
-    categoria: "Sandwiches",
     precio: 14900,
     tipo: "vegano, vegetariano",
   },
@@ -42,7 +38,6 @@ const viandasDisponibles = [
     id: 5,
     nombre: "Bife con Ensalada",
     porciones: 4,
-    categoria: "Minutas",
     precio: 1710,
     tipo: "carne",
   },
@@ -50,7 +45,6 @@ const viandasDisponibles = [
     id: 6,
     nombre: "Fideos con Tuco",
     porciones: 3,
-    categoria: "Guisos y pastas",
     precio: 12400,
     tipo: "vegetariano",
   },
@@ -58,7 +52,7 @@ const viandasDisponibles = [
 
 /* Inputs de Usuario para declarar variables de información de usuario */
 function inputUsuario() {
-  let nombreUsuario = prompt(
+  nombreUsuario = prompt(
     "Bienvenido a la Foodstore de Bon AppetEat!\nIngrese su nombre"
   );
   while (nombreUsuario === "" || nombreUsuario === " ") {
@@ -66,7 +60,7 @@ function inputUsuario() {
       "No se cargó ningun nombre. Por favor, ingrese su nombre."
     );
   }
-  let direccionUsuario = prompt(
+  direccionUsuario = prompt(
     `Hola ${nombreUsuario}! Por favor, compartinos una dirección de entrega`
   );
   while (direccionUsuario === "" || direccionUsuario === " ") {
@@ -74,7 +68,7 @@ function inputUsuario() {
       "No se cargo ninguna direccion. Por favor, ingrese una dirección de entrega."
     );
   }
-  let emailUsuario = prompt(
+  emailUsuario = prompt(
     `Gracias ${nombreUsuario}! Por último, te pedimos una direccion de e-mail para coordinar la entrega.`
   );
   while (emailUsuario === "" || emailUsuario === " ")
@@ -100,6 +94,7 @@ function confirmacionUsuario() {
       case "SI":
       case "Si":
       case "si":
+        console.log(`Bienvenido a Bon Appeteat ${nombreUsuario}!`);
         navegadorApp();
         break;
       case "NO":
@@ -131,7 +126,7 @@ function navegadorApp() {
         navegadorCompra();
         break;
       case 2:
-        alert("Esto te lleva a la seccion CARRITO");
+        navegadorCarrito();
         break;
       case 3:
         inputUsuario();
@@ -151,7 +146,7 @@ function navegadorApp() {
 function navegadorCompra() {
   let compraNav = Number(
     prompt(
-      "MENU COMPRAR VIANDAS\nA continuación, selecciona la opción de lo que quieras hacer:\n1 - Ver viandas disponibles\n2 - Buscar viandas\n3 - Filtrar viandas\n4 - Ver mi carrito\n5 - Volver al menú principal"
+      "MENU COMPRAR VIANDAS\nA continuación, selecciona la opción de lo que quieras hacer:\n1 - Ver viandas disponibles\n2 - Buscar viandas\n3 - Ver mi carrito\n4 - Volver al menú principal"
     )
   );
   if (compraNav != "") {
@@ -163,12 +158,9 @@ function navegadorCompra() {
         buscarPorTexto();
         break;
       case 3:
-        alert("Aca tengo que armar un FILTRADOR de viandas con opciones");
+        navegadorCarrito();
         break;
       case 4:
-        alert("Aca tengo que llevar al CARRITO");
-        break;
-      case 5:
         navegadorApp();
         break;
       default:
@@ -235,9 +227,6 @@ function buscarPorTexto() {
   }
 }
 
-// Filtros (3)
-/* FALTA ESTA! */
-
 // Sumar al carrito (futuro boton)
 function agregarAlCarrito() {
   const addVerificar = prompt(
@@ -259,64 +248,56 @@ function agregarAlCarrito() {
             "Genial! En ese caso escriba el NRO de Vianda que quiera agregar al carrito.\nSi lo desconoce recuerde que puede ver nuestro listado, utilizar nuestro buscado o filtros!"
           )
         );
-        const resultados = [];
-        for (let i = 0; i < viandasDisponibles.length; i++) {
-          const vianda = viandasDisponibles[i];
-          const info = Object.values(vianda);
-          for (let j = 0; j < info.length; j++) {
-            const infoDos = info[j];
-            if (infoDos === addId) {
-              resultados.push(vianda);
-            }
-          }
-        }
-        if (resultados.length === 0 || addId === "" || addId === " ") {
+        const viandaSeleccionada = viandasDisponibles.find(
+          (vianda) => vianda.id == addId
+        );
+        if (addId === 0 || addId > viandasDisponibles.length + 1) {
           alert(
             `Disculpanos! No logramos encontrar ninguna vianda que coincida con el NRO ${addId}. Intenta nuevamente con alguna otra palabra clave!`
           );
           agregarAlCarrito();
         } else {
           console.log("Hemos agregado la siguiente vianda a tu carrito:");
-          for (let i = 0; i < resultados.length; i++) {
-            const coincidencia = resultados[i];
-            carritoCompra.push(coincidencia);
-            totalPrecio += coincidencia.precio;
-            console.log(
-              `Vianda nro. ${coincidencia.id} - ${coincidencia.nombre}: Rinde ${coincidencia.porciones} porciones, con un valor de $${coincidencia.precio}.`
-            );
-            console.log(
-              "El valor total de tu cuenta hasta ahora es de: $" + totalPrecio
-            );
-            alert("Hemos agregado la vianda al carrito!");
-            const deshacer = prompt(
-              "Querés deshacer haber agregado esta vianda al carrito?\nResponde con si o no."
-            );
-            if (deshacer != "") {
-              switch (deshacer) {
-                case "No":
-                case "NO":
-                case "no":
-                  alert("Entendido!");
-                  agregarAlCarrito();
-                  break;
-                case "Si":
-                case "SI":
-                case "si":
-                  carritoCompra.shift();
-                  totalPrecio -= coincidencia.precio;
-                  console.log(
-                    "El valor total de tu cuenta hasta ahora es de: $" +
-                      totalPrecio
-                  );
-                  alert("Se ha borrado este item!");
-                  agregarAlCarrito();
-                  break;
-                default:
-                  alert("Por favor, ingresar una respuesta por si o no");
-                  deshacerAdd();
-                  break;
-              }
+          carritoCompra.push(viandaSeleccionada);
+          totalPrecio += viandaSeleccionada.precio;
+          console.log(
+            `Vianda nro. ${viandaSeleccionada.id} - ${viandaSeleccionada.nombre}: Rinde ${viandaSeleccionada.porciones} porciones, con un valor de $${viandaSeleccionada.precio}.`
+          );
+          console.log(
+            "El valor total de tu cuenta hasta ahora es de: $" + totalPrecio
+          );
+          alert("Hemos agregado la vianda al carrito!");
+          const deshacer = prompt(
+            "Querés deshacer haber agregado esta vianda al carrito?\nResponde con si o no."
+          );
+          if (deshacer != "") {
+            switch (deshacer) {
+              case "No":
+              case "NO":
+              case "no":
+                alert("Entendido!");
+                agregarAlCarrito();
+                break;
+              case "Si":
+              case "SI":
+              case "si":
+                carritoCompra.shift();
+                totalPrecio -= viandaSeleccionada.precio;
+                console.log(
+                  "El valor total de tu cuenta hasta ahora es de: $" +
+                    totalPrecio
+                );
+                alert("Se ha borrado este item!");
+                agregarAlCarrito();
+                break;
+              default:
+                alert("Por favor, ingresar una respuesta por si o no");
+                deshacerAdd();
+                break;
             }
+          } else {
+            alert("No ha ingresado ninguna respuesta.");
+            agregarAlCarrito();
           }
         }
         break;
@@ -335,7 +316,7 @@ function agregarAlCarrito() {
 function navegadorCarrito() {
   let opcionNav = Number(
     prompt(
-      "MENU CARRITO\nA continuación, selecciona la opción de lo que quieras hacer:\n1 - Mostrar mi carrito\n2 - Vaciar mi carrito\n3 - Finalizar mi compra\n4 - Volver al menú principal"
+      "MENU CARRITO\nA continuación, selecciona la opción de lo que quieras hacer:\n1 - Mostrar mi carrito\n2 - Vaciar mi carrito\n3 - Finalizar mi compra\n4 - Seguir comprando\n5 - Volver al menú principal"
     )
   );
   if (opcionNav != "") {
@@ -350,6 +331,9 @@ function navegadorCarrito() {
         finalizarCompra();
         break;
       case 4:
+        navegadorCompra();
+        break;
+      case 5:
         navegadorApp();
         break;
       default:
@@ -364,11 +348,30 @@ function navegadorCarrito() {
 }
 
 // Mostrar carrito
-/* FALTA ESTA! function mostrarCarrito() {} */
+function mostrarCarrito() {
+  if (carritoCompra != 0) {
+    console.log("TU CARRITO:");
+    carritoCompra.forEach((vianda, indice) => {
+      console.log(
+        `${indice + 1} - Vianda NRO ${vianda.id} | ${vianda.nombre}: Rinde ${
+          vianda.porciones
+        } porciones, con un valor de $${
+          vianda.precio
+        }. Tené en cuenta que esta vianda es para dieta tipo ${vianda.tipo}.`
+      );
+    });
+    console.log("El total de tu cuenta a pagar es de: $" + totalPrecio);
+    alert("La info del carrito se ha mostrado en la consola!");
+    navegadorCarrito();
+  } else {
+    alert("El carrito está vacío! Probá agregando algunas viandas!");
+    navegadorApp();
+  }
+}
 
 // Vaciar carrito
 function vaciarCarrito() {
-  carritoCompras.splice(0, carritoCompras.length);
+  carritoCompra.splice(0, carritoCompra.length);
   totalPrecio = 0;
   alert("Se ha vaciado el carrito!");
   console.log("El valor total de tu cuenta se ha revertido a: $" + totalPrecio);
@@ -405,3 +408,5 @@ function finalizarCompra() {
     finalizarCompra();
   }
 }
+
+inputUsuario();
