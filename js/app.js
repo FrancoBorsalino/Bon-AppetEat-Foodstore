@@ -245,7 +245,7 @@ function agregarAlCarrito() {
       case "si":
         const addId = Number(
           prompt(
-            "Genial! En ese caso escriba el NRO de Vianda que quiera agregar al carrito.\nSi lo desconoce recuerde que puede ver nuestro listado, utilizar nuestro buscado o filtros!"
+            "Genial! En ese caso escriba el NUMERO (NRO) de Vianda que quiera agregar al carrito.\nSi lo desconoce recuerde que puede ver nuestro listado, utilizar nuestro buscado o filtros!"
           )
         );
         const viandaSeleccionada = viandasDisponibles.find(
@@ -267,11 +267,11 @@ function agregarAlCarrito() {
             "El valor total de tu cuenta hasta ahora es de: $" + totalPrecio
           );
           alert("Hemos agregado la vianda al carrito!");
-          const deshacer = prompt(
+          const deshacerAdd = prompt(
             "Querés deshacer haber agregado esta vianda al carrito?\nResponde con si o no."
           );
-          if (deshacer != "") {
-            switch (deshacer) {
+          if (deshacerAdd != "") {
+            switch (deshacerAdd) {
               case "No":
               case "NO":
               case "no":
@@ -291,8 +291,12 @@ function agregarAlCarrito() {
                 agregarAlCarrito();
                 break;
               default:
-                alert("Por favor, ingresar una respuesta por si o no");
-                deshacerAdd();
+                alert(
+                  `"` +
+                    deshacerAdd +
+                    `" no es una respuesta correcta. Por las dudas, no borramos el elemento de tu carrito!`
+                );
+                agregarAlCarrito();
                 break;
             }
           } else {
@@ -381,7 +385,7 @@ function vaciarCarrito() {
 // Finalizar compra
 function finalizarCompra() {
   let ventaFinal = prompt(
-    `${nombreUsuario} deseas comprar tus productos por un total de ${totalPrecio} para ser enviadas a ${direccionUsuario}?\nPor favor, responde por si o no.`
+    `${nombreUsuario} deseas comprar tus productos por un total de $${totalPrecio} para ser enviadas a ${direccionUsuario}?\nPor favor, responde por si o no.`
   );
   if (ventaFinal != "") {
     switch (ventaFinal) {
@@ -389,7 +393,7 @@ function finalizarCompra() {
       case "SI":
       case "si":
         alert(
-          `Perfecto! Nos estaremos contactando contigo a tu dirección de e-mail ${emailUsuario} para coordinar el pago y la entrega.\nMuchas gracias por usar Bon AppetEat!`
+          `Perfecto! Nos estaremos contactando contigo a tu dirección de e-mail - ${emailUsuario} - para coordinar el pago y la entrega.\nMuchas gracias por usar Bon AppetEat!`
         );
         break;
       case "No":
