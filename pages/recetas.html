@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Recetas para pensar menos en qué comer, y  disfrutar más comiendo. Podés buscar, guardar, compartir y crear todas las recetas que puedas imaginarte. No pierdas más el tiempo ni la cabeza, empezá a disfrutar de cocinar!">
+    <meta name="keywords"
+        content="RECETAS, RECETA, BUSCAR, CATEGORIAS COCINAR, COCINA, COMIDA, COMIDAS, VEGANO, VEGANA, VEGETARIANO, VEGETARIANA, CELIACO, CELIACA, DIFICULTAD, SIMPLE, RAPIDO, INGREDIENTES, FACIL, MENU, GOURMET, AMATEUR, CHEF, RECETAS RAPIDAS, RECETAS FACILES, RECETAS RICAS, RECOMENDADO, SUGERENCIAS, CONSEJOS DE COCINA">
+    <title>Bon AppetEat - Buscá recetas, ingredientes, chefs o lo que te imagines!</title>
+    <link rel="shortcut icon" href="../imgs/logoFavicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Style en css -->
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+
+
+<body>
+    <main class="main__grid--recetas">
+        <header class="grid__header">
+            <nav class="navBar">
+                <ol class="grid__padding--left grid__padding--right noBullet">
+                    <li><a href="../index.html"><img id="logoNavBar" src="../imgs/logoNavBar.png"
+                                alt="Logo y leyenda Bon AppetEat"></a></li>
+                    <ul class="navBar__links--center noBullet">
+                        <li><a class="robotoSemibold" href="../pages/recetas.html">Recetas</a></li>
+                        <li><a class="robotoSemibold" href="../pages/sobreNosotros.html">Sobre nosotros</a></li>
+                        <li><a class="robotoSemibold" href="../pages/contacto.html">Contacto</a></li>
+                    </ul>
+                    <ul class="navBar__links--login noBullet">
+                        <li><a class="robotoSemibold" href="../pages/iniciarSesion.html"> Iniciar Sesión</a></li>
+                        <li><a class="robotoSemibold" id="registroButton" href="../pages/registro.html">REGISTRARSE</a>
+                        </li>
+                    </ul>
+                </ol>
+            </nav>
+        </header>
+        <section class="grid__carousel"><!-- Carousel de recetas -->
+            <div id="carouselExampleCaptions" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://assets.unileversolutions.com/recipes-v2/230309.jpg" class="d-block w-100"
+                            alt="Hummus de Garbanzos">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>Hummus de Garbanzos</h1>
+                            <p>El componente vegetariano perfecto para dips, ensaladas y acompañar comidas.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://img2.rtve.es/i/?w=1600&i=1635859279860.jpg" class="d-block w-100"
+                            alt="Tiramisu">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2>Tiramisú</h2>
+                            <p>El mejor postre que nos dió Italia, con su receta original.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://lacocinadefrabisa.lavozdegalicia.es/wp-content/uploads/2013/09/entra%C3%B1a1-2.jpg"
+                            class="d-block w-100" alt="Entraña">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Entraña a la parrilla</h3>
+                            <p>Si estás antojado de carne, y no querés pasar horas con la parilla prendida, este es tu
+                                corte.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+        <section class="buscador--recetas grid__buscador"><!-- Buscador -->
+            <img src="../imgs/iconoBuscador.png" alt="Lupa de busqueda">
+            <input class="buscador__barra--recetas" class="robotoRegular" type="search" name="buscadorRecetasIndex"
+                placeholder="Buscá recetas, ingredientes o chefs">
+        </section>
+        <section class="categorias--recetas grid__categorias grid__padding--left grid__padding--right">
+            <!-- Seccion categorias -->
+            <h2 class="categorias__titulo robotoBold">Buscá por categorías</h2>
+            <article class="categorias__row">
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaVegan.png"
+                        alt="Imagen de Categoría Vegano">
+                    <p class="categorias__card--titulo">Vegano</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaGlutenF.png"
+                        alt="Imagen de Categoría Sin Gluten">
+                    <p class="categorias__card--titulo">Sin Gluten</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaVerduras.png"
+                        alt="Imagen de Categoría Verduras">
+                    <p class="categorias__card--titulo">Verduras</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaViandas.png"
+                        alt="Imagen de Categoría Viandas">
+                    <p class="categorias__card--titulo">Viandas</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaSandw.png"
+                        alt="Imagen de Categoría Sandwiches">
+                    <p class="categorias__card--titulo">Sandwiches</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaVege.png"
+                        alt="Imagen de Categoría Vegetariano">
+                    <p class="categorias__card--titulo">Vegetariano</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaSopas.png"
+                        alt="Imagen de Categoría Sopas">
+                    <p class="categorias__card--titulo">Sopas</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaSnacks.png"
+                        alt="Imagen de Categoría Snacks">
+                    <p class="categorias__card--titulo">Snacks</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaSalteados.png"
+                        alt="Imagen de Categoría Salteados">
+                    <p class="categorias__card--titulo">Salteados</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaSalsas.png"
+                        alt="Imagen de Categoría Salsas">
+                    <p class="categorias__card--titulo">Salsas</p>
+                </div>
+            </article>
+            <article class="categorias__row">
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaItalian.png"
+                        alt="Imagen de Categoría Italiana">
+                    <p class="categorias__card--titulo">Italiana</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaAsian.png"
+                        alt="Imagen de Categoría Asiática">
+                    <p class="categorias__card--titulo">Asiática</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaSushi.png"
+                        alt="Imagen de Categoría Sushi">
+                    <p class="categorias__card--titulo">Sushi</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaHamb.png"
+                        alt="Imagen de Categoría Hamburguesas">
+                    <p class="categorias__card--titulo">Hamburguesas</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaGuisos.png"
+                        alt="Imagen de Categoría Guisos">
+                    <p class="categorias__card--titulo">Guisos</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaFitness.png"
+                        alt="Imagen de Categoría Fitness">
+                    <p class="categorias__card--titulo">Fitness</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaEnsaladas.png"
+                        alt="Imagen de Categoría Ensaladas">
+                    <p class="categorias__card--titulo">Ensaladas</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaPokes.png"
+                        alt="Imagen de Categoría Pokes y Bowls">
+                    <p class="categorias__card--titulo">Pokes y Bowls</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaDesayuno.png"
+                        alt="Imagen de Categoría Desayunos">
+                    <p class="categorias__card--titulo">Desayunos</p>
+                </div>
+                <div class="categorias__card robotoBold">
+                    <img class="categorias__card--img" src="../imgs/categorias/iconoCategoriaBrunch.png"
+                        alt="Imagen de Categoría Brunch">
+                    <p class="categorias__card--titulo">Brunch</p>
+                </div>
+            </article>
+        </section>
+        <section class="recetas--recetas grid__recetas grid__padding--left grid__padding--right">
+            <!-- Seccion recetas destacadas -->
+            <h1 class="recetas__titulo robotoBold">¡Inspirate con las recetas más populares de la semana!</h1>
+            <article class="recetas__cards">
+                <div class="card scale">
+                    <img src="https://i2.wp.com/sabordelobueno.com/wp-content/uploads/2021/06/curry-garbanzos-atomatado.jpg?resize=750%2C500&ssl=1"
+                        class="card-img-top" alt="Plato de Curry con Garbanzos">
+                    <div class="card-body">
+                        <p class="card-title robotoBold">Curry de Garbanzos</p>
+                        <p class="card-text robotoRegular">La receta más rica para hacer un curry de garbanzos fácil,
+                            perfecta para darle un toque diferente a los potajes de siempre.</p>
+                    </div>
+                </div>
+                <div class="card scale">
+                    <img src="https://cocinalocal.cl/wp-content/uploads/2021/08/pastel-de-papas.jpg"
+                        class="card-img-top" alt="Pastel de papas">
+                    <div class="card-body">
+                        <p class="card-title robotoBold">Pastel de Papas</p>
+                        <p class="card-text robotoRegular">Un plato ideal para invitar amigos o familia y
+                            teletrasportarlos a la niñez. Un clásico que nunca falla.</p>
+                    </div>
+                </div>
+                <div class="card scale">
+                    <img src="https://i1.wp.com/irecetasfaciles.com/wp-content/uploads/2020/10/Ratatouille.jpg?fit=1280%2C720&ssl=1"
+                        class="card-img-top" alt="Ratatouille">
+                    <div class="card-body">
+                        <p class="card-title robotoBold">Ratatouille</p>
+                        <p class="card-text robotoRegular">No solo se trata de un plato delicioso sino que además
+                            también queda muy bonito en la mesa.</p>
+                    </div>
+                </div>
+                <div class="card scale">
+                    <img src="https://cdn0.recetasgratis.net/es/posts/7/1/5/panqueques_con_dulce_de_leche_filloas_dulces_60517_orig.jpg"
+                        class="card-img-top" alt="Panqueques Rellenos">
+                    <div class="card-body">
+                        <p class="card-title robotoBold">Panqueques Rellenos</p>
+                        <p class="card-text robotoRegular">Panqueques rellenos de dulce de leche, crema, o lo que
+                            quieras! Uno de mis postres favoritos.</p>
+                    </div>
+                </div>
+                <div class="card scale">
+                    <img src="https://www.recetasnestle.com.ar/sites/default/files/srh_recipes/412a621fff614c3adfaf97fd6a1b3b8c.jpg"
+                        class="card-img-top" alt="Tarta de Espinaca">
+                    <div class="card-body">
+                        <p class="card-title robotoBold">Tarta de Espinaca</p>
+                        <p class="card-text robotoRegular">Tarta de espinaca con base de papa - para ponerle onda! Una
+                            vez que la probás así, las tartas nunca serán lo mismo!</p>
+                    </div>
+                </div>
+                <div class="card scale">
+                    <img src="https://www.nomecomesnada.es/wp-content/uploads/ngg_featured/%C3%B1oquis-6-web.jpg"
+                        class="card-img-top" alt="Gnocchis Caseros">
+                    <div class="card-body">
+                        <p class="card-title robotoBold">Gnocchis Caseros</p>
+                        <p class="card-text robotoRegular">Gnocchis de papa, zapallo, o lo que gustes. Hoy les comparto
+                            una receta familiar para que el 29 queden como unos profesionales!</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <footer class="grid__footer">
+            <ol class="main__footer">
+                <ul class="footer__links noBullet grid__padding--left"><!-- Para iconos de redes sociales -->
+                    <li class="robotoRegular"><a href="https://www.youtube.com/channel/UC9D3T1NfKx_tJhrFBuXiDGg"><img
+                                src="../imgs/iconoYoutube.png" alt="Link a Youtube"></a></li>
+                    <li class="robotoRegular"><a href="https://twitter.com/BonAppetEat_app"><img
+                                src="../imgs/iconoTwitter.png" alt="Link a Twitter"></a></li>
+                    <li class="robotoRegular"><a href="https://www.instagram.com/bonappeteat_app/"><img
+                                src="../imgs/iconoInstagram.png" alt="Link a Instagram"></a></li>
+                    <li class="robotoRegular"><a href="https://www.facebook.com/profile.php?id=100087445178159"><img
+                                src="../imgs/iconoFacebook.png" alt="Link a Facebook"></a></li>
+                    <li class="robotoRegular"><a href=""><img src="../imgs/iconoCompartir.png" alt="Compartir"></a></li>
+                </ul>
+                <ul class="footer__mapsite noBullet grid__padding--right">
+                    <li class="robotoRegular">
+                        <p>Copyright @ 2023 Bon AppetEat</p>
+                    </li>
+                    <li class="robotoRegular"><a href="../pages/recetas.html">Buscá recetas</a></li>
+                    <!-- Agregar href si se diseña esta página -->
+                    <li class="robotoRegular"><a href="../pages/contacto.html">Contactanos!</a></li>
+                    <!-- Agregar href si se diseña esta página -->
+                    <li class="robotoRegular"><a href="../pages/sobreNosotros.html">Sobre Nosotros</a></li>
+                    <!-- Agregar href si se diseña esta página -->
+                    <li class="robotoRegular"><a href="">Legales, privacidad y cookies</a></li>
+                    <!-- Agregar href si se diseña esta página -->
+                </ul>
+            </ol>
+        </footer>
+    </main>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+@use '../utilities';
+
+.info__texto {
+    @include utilities.sizes (100%, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    p {
+        font-size: 1rem;
+        font-weight: 400;
+        text-align: justify;
+
+        strong {
+            color: utilities.$color-primario;
+            font-weight: 650;
+        }
+    }
+}
+
+.section__funct {
+    @include utilities.sizes (300px, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    div {
+        @include utilities.sizes (100%, 100%);
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        img {
+            width: 50px;
+        }
+
+        p {
+            font-size: 0.85rem;
+            padding-left: 5%;
+            margin-bottom: 0px;
+
+            strong {
+                color: utilities.$color-secundario;
+                font-weight: 900;
+            }
+        }
+    }
+}
+
+#carouselExampleSlidesOnly {
+    height: 100%;
+    margin-bottom: -55px;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 431px) {
+
+    .info__texto {
+        padding-right: 10px;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-size: 0.7rem;
+        }
+    }
+
+    .section__funct {
+        padding-left: 10px;
+
+        div {
+            img {
+                width: 40px;
+            }
+
+            p {
+                font-size: 0.675rem;
+            }
+        }
+    }
+
+    #carouselExampleSlidesOnly {
+        margin-bottom: -55px;
+    }
+}
+
+@media screen and (min-width: 432px) and (max-width: 566px) {
+    .info__texto {
+        padding-right: 10px;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 0.85rem;
+        }
+    }
+
+    .section__funct {
+        padding-left: 10px;
+    }
+
+    #carouselExampleSlidesOnly {
+        margin-bottom: -85px;
+    }
+
+}
+
+@media screen and (min-width: 567px) and (max-width: 767px) {
+    .info__texto {
+        padding-right: 10px;
+    }
+
+    .section__funct {
+        padding-left: 10px;
+    }
+}

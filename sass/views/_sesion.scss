@@ -1,0 +1,65 @@
+@use '../utilities';
+
+.section__sesion {
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    h1 {
+        width: 80%;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+}
+
+#boton__login {
+    @include utilities.boton;
+}
+
+.sesion__texto {
+    padding-bottom: 15%;
+    text-align: center;
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    a {
+        text-decoration: underline;
+        color: black;
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 431px) {
+
+    .section__sesion h1 {
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    #boton__login {
+        margin-left: 5%;
+    }
+
+}
+
+@media screen and (min-width: 432px) and (max-width: 566px) {
+    .section__sesion h1 {
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    #boton__login {
+        margin-left: 5%;
+    }
+
+}
+
+@media screen and (min-width: 567px) and (max-width: 767px) {
+    #boton__login {
+        margin-left: 5%;
+    }
+
+}

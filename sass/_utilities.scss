@@ -1,0 +1,52 @@
+$color-primario: rgb(230, 87, 44);
+$color-secundario: rgb(0, 100, 90, 1);
+$color-blanco: rgb(255, 255, 255);
+
+@mixin flex_R-SB-C-NW {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+@mixin grid_base {
+    display: grid;
+    height: 275px;
+}
+
+@mixin grid_gaps {
+    column-gap: 3%;
+    row-gap: 20%;
+}
+
+@mixin sizes ($height, $width) {
+    height: $height;
+    width: $width;
+}
+
+@mixin boton {
+    padding: 0.6rem;
+    padding-right: 2.3rem;
+    padding-left: 2.3rem;
+    margin-right: 1rem;
+    font-size: 1rem;
+    color: $color-blanco;
+    background-color: $color-secundario;
+    border: none;
+    border-radius: 0.375rem;
+    text-align: center;
+
+    &:hover {
+        opacity: 75%;
+    }
+}
+
+/* Animación cancelada para simplificar la tienda de E-Commerce */
+/* .scale {
+    transition: all 0.5s;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+} */
