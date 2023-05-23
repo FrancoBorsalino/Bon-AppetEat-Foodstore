@@ -198,6 +198,30 @@ function deleteCarrito(index) {
   refreshCarrito();
 }
 
+/* Funcionamiento formulario */
+const form = document.querySelector("#form");
+const inputName = document.querySelector("#inputName");
+const inputEmail = document.querySelector("#inputEmail");
+const respuesta = document.querySelector("#respuesta");
+
+form.addEventListener("submit", infoUsuario);
+
+function infoUsuario(e) {
+  e.preventDefault();
+  if (inputName.value === "" || inputEmail === "") {
+    let respuestaNo = document.createElement("div");
+    respuestaNo.innerHTML = `<h5>Asegurate de completar ambos campos para poder avanzar con tu compra!</h5>`;
+    document.querySelector("#respuesta").innerHTML = "";
+    document.querySelector("#respuesta").appendChild(respuestaNo);
+  } else {
+    let respuestaSi = document.createElement("div");
+    respuestaSi.innerHTML = `<h5>Gracias por elegirnos!</h5>
+    <p>Hemos enviado nuestra información de contacto para avanzar con la compra. Muchas gracias!</p>`;
+    document.querySelector("#respuesta").innerHTML = "";
+    document.querySelector("#respuesta").appendChild(respuestaSi);
+  }
+}
+
 /* filtros que no se me ocurrió como aplicarlo en el HTML, pero que dejo el código de cómo funcionaria */
 
 let filterPrecio = viandasDisponibles.filter((item) => item.precio >= 15000);

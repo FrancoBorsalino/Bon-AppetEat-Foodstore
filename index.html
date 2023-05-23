@@ -74,17 +74,18 @@
             </div>
         </section>
         <section class="grid__formEntrega grid__padding--left grid__padding--right"> <!-- Form de entrega (B) -->
-            <p class="robotoBold">Completá el formulario para entregar tus productos:</p>
-            <label>Nombre y Apellido</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Ingrese su Nombre y Apellido">
-            <label>Dirección de entrega</label>
-            <input type="text" class="form-control" id="inputName"
-                placeholder="Ingrese la Dirección donde quiera recibir sus productos">
-            <label>Correo Electrónico</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese su E-mail">
-            <div class="container-form">
-                <button type="submit" id="boton__submit" class="boton__formEntrega">Comprar mis productos</button>
-            </div>
+            <h3 class="robotoBold">Completá el formulario para entregar tus productos:</h3>
+            <form id="form">
+                <h3>Formulario de Contacto</h3>
+                <label>Nombre y Apellido</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Ingrese su Nombre y Apellido">
+                <label>Correo Electrónico</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese su E-mail">
+                <div class="container-form">
+                    <button type="submit" class="boton__formEntrega">Comprar y Enviar Información</button>
+                </div>
+                <div id="respuesta"></div>
+            </form>
         </section>
         <section class="categorias grid__categorias grid__padding--left grid__padding--right">
             <!-- Seccion categorias -->
