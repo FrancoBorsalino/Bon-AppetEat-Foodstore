@@ -1,106 +1,56 @@
-/* Declaración de variables globales, objetos y arrays */
+//Declaracion de Variables globales
+let cantidadViandas;
 let totalPrecio = 0;
-let nombreUsuario;
-let direccionUsuario;
-let emailUsuario;
-const carritoCompra = [];
+let totalProductos = 0;
+const precioViandaUno = 2000;
+const precioViandaDos = 2100;
+const precioViandaTres = 1800;
+const precioViandaCuatro = 2500;
+const precioViandaCinco = 1650;
+const precioViandaSeis = 2650;
 
-const viandasDisponibles = [
-  {
-    id: 1,
-    nombre: "Curry con Garbanzos",
-    porciones: 5,
-    precio: 16700,
-    tipo: "vegano, vegetariano",
-  },
-  {
-    id: 2,
-    nombre: "Pollo con Arroz",
-    porciones: 4,
-    precio: 13200,
-    tipo: "carne",
-  },
-  {
-    id: 3,
-    nombre: "Milanesa con Pure",
-    porciones: 4,
-    precio: 18300,
-    tipo: "carne",
-  },
-  {
-    id: 4,
-    nombre: "Sandwich Vegano",
-    porciones: 6,
-    precio: 14900,
-    tipo: "vegano, vegetariano",
-  },
-  {
-    id: 5,
-    nombre: "Bife con Ensalada",
-    porciones: 4,
-    precio: 1710,
-    tipo: "carne",
-  },
-  {
-    id: 6,
-    nombre: "Fideos con Tuco",
-    porciones: 3,
-    precio: 12400,
-    tipo: "vegetariano",
-  },
-];
-
-/* Inputs de Usuario para declarar variables de información de usuario */
-function inputUsuario() {
+//Declaracion de información del usuario
+let nombreUsuario = prompt(
+  "Bienvenido a la Foodstore de Bon AppetEat!\nIngrese su nombre"
+);
+while (nombreUsuario === "") {
   nombreUsuario = prompt(
-    "Bienvenido a la Foodstore de Bon AppetEat!\nIngrese su nombre"
+    "No se cargó ningun nombre. Por favor, ingrese su nombre."
   );
-  while (nombreUsuario === "" || nombreUsuario === " ") {
-    nombreUsuario = prompt(
-      "No se cargó ningun nombre. Por favor, ingrese su nombre."
-    );
-  }
-  direccionUsuario = prompt(
-    `Hola ${nombreUsuario}! Por favor, compartinos una dirección de entrega`
-  );
-  while (direccionUsuario === "" || direccionUsuario === " ") {
-    direccionUsuario = prompt(
-      "No se cargo ninguna direccion. Por favor, ingrese una dirección de entrega."
-    );
-  }
-  emailUsuario = prompt(
-    `Gracias ${nombreUsuario}! Por último, te pedimos una direccion de e-mail para coordinar la entrega.`
-  );
-  while (emailUsuario === "" || emailUsuario === " ")
-    console.log(
-      `Nombre ingresado: ${nombreUsuario}.\nDirección ingresada: ${direccionUsuario}.\nDirección de e-mail: ${emailUsuario}.`
-    );
-  confirmacionUsuario();
 }
+let direccionUsuario = prompt(
+  `Hola ${nombreUsuario}! Por favor, compartinos una dirección de entrega`
+);
+while (direccionUsuario === "") {
+  direccionUsuario = prompt(
+    "No se cargo ninguna direccion. Por favor, ingrese una dirección de entrega."
+  );
+}
+console.log(
+  `Nombre ingresado: ${nombreUsuario}.\nDirección ingresada: ${direccionUsuario}.`
+);
+confirmacionUsuario();
 
-/* Declaracion de funcion para confirmar la información de usuario */
+//La primera funcion define la información del usuario
 function confirmacionUsuario() {
   let confirmarDatos = prompt(
     "Bienvenido " +
       nombreUsuario +
       "!\nEstaremos entregando tu mercadería a la dirección: " +
       direccionUsuario +
-      ", y te contactaremos al e-mail: " +
-      emailUsuario +
-      ".\nSon estos datos correctos?"
+      "!\nSon estos datos correctos?"
   );
   if (confirmarDatos != "") {
     switch (confirmarDatos) {
       case "SI":
       case "Si":
       case "si":
-        console.log(`Bienvenido a Bon Appeteat ${nombreUsuario}!`);
-        navegadorApp();
+        cantidadProducto();
         break;
       case "NO":
       case "No":
       case "no":
-        inputUsuario();
+        location.reload();
         break;
       default:
         alert("Por favor, ingresar una respuesta por si o no");
@@ -113,300 +63,113 @@ function confirmacionUsuario() {
   }
 }
 
-/* SECCION NAVEGACION - Funcion condicional para presentarle al usuario la navegación de la app */
-function navegadorApp() {
-  let opcionNav = Number(
-    prompt(
-      "Bienvenido a Bon Appeteat! Seleccione una de las opciones para acceder al menu:\n1 - Comprar Viandas\n2 - Ver mi carrito\n3 - Modificar mis datos"
-    )
+//La segunda funcion tiene como fin definir los productos que compra
+function cantidadProducto() {
+  let cantidadViandas = parseInt(
+    prompt("Cuantas viandas desea comprar? (máximo 10 unidades por compra)")
   );
-  if (opcionNav != "") {
-    switch (opcionNav) {
-      case 1:
-        navegadorCompra();
-        break;
-      case 2:
-        navegadorCarrito();
-        break;
-      case 3:
-        inputUsuario();
-        break;
-      default:
-        alert("Por favor, ingresa el número de alguna de las opciones!");
-        navegadorApp();
-        break;
-    }
-  } else {
-    alert("No ha ingresado ninguna respuesta.");
-    navegadorApp();
-  }
-}
-
-/* SECCION COMPRA - Funciones y metodos para la tienda de Viandas */
-function navegadorCompra() {
-  let compraNav = Number(
-    prompt(
-      "MENU COMPRAR VIANDAS\nA continuación, selecciona la opción de lo que quieras hacer:\n1 - Ver viandas disponibles\n2 - Buscar viandas\n3 - Ver mi carrito\n4 - Volver al menú principal"
-    )
-  );
-  if (compraNav != "") {
-    switch (compraNav) {
-      case 1:
-        mostrarViandas();
-        break;
-      case 2:
-        buscarPorTexto();
-        break;
-      case 3:
-        navegadorCarrito();
-        break;
-      case 4:
-        navegadorApp();
-        break;
-      default:
-        alert("Por favor, ingresa el número de alguna de las opciones!");
-        navegadorCompra();
-        break;
-    }
-  }
-}
-
-// Mostrar la tienda virtual (1)
-function mostrarViandas() {
-  // Metodo muy simple de mostrar viandas llamando con un forEach cada elemento del Array e interpretandolo en un console.log
-  console.log("Estas son las viandas disponibles:\n");
-  viandasDisponibles.forEach((vianda) => {
-    console.log(
-      `Vianda nro. ${vianda.id} - ${vianda.nombre}: Rinde ${vianda.porciones} porciones, con un valor de $${vianda.precio}. Tené en cuenta que esta vianda es para dieta tipo ${vianda.tipo}.`
+  if (cantidadViandas >= 1 && cantidadViandas <= 10) {
+    console.log(`Cantidad de viandas a ordenar: ${cantidadViandas}`);
+    alert(
+      `Perfecto! A continuación, seleccionaremos ${cantidadViandas} viandas para que organices tus comidas!`
     );
-  });
-  alert("Las viandas se han mostrado en la consola!");
-  agregarAlCarrito();
-}
-
-// Buscador (2)
-function buscarPorTexto() {
-  const inputBusqueda = prompt("Escriba una palabra que desee buscar:"); //Input de usuario para la busqueda
-  const inputBusquedaTLC = inputBusqueda.toLowerCase(); // Modifico esta variable a lower case
-  const resultados = []; // Declaro un array "resultados" donde voy a pushear lo que coincida
-  // Le indico que haga un bucle por cada uno de los elementos de mi Array de viandas en donde:
-  for (let i = 0; i < viandasDisponibles.length; i++) {
-    const vianda = viandasDisponibles[i]; // Declaro "vianda" como objeto (con todos sus valores) correspondiente al indice del ciclo
-    const info = Object.values(vianda); // Declaro "info" como un Array conformado por los valores de dicho objeto
-    // Luego le indico que haga un bucle por cada valor dentro del nuevo Array en donde:
-    for (let j = 0; j < info.length; j++) {
-      const infoDos = info[j].toString().toLowerCase(); // Declaro "infoDos" donde cada ciclo será cada uno de los valores que convertí en Array en "info". Lo convierto a string y lower case para poder comparar con el prompt
-      // Declaro un condicional if en donde planteo que si el prompt buscado, existe dentro de los valores de "infoDos", ejecute:
-      if (infoDos.indexOf(inputBusquedaTLC) !== -1) {
-        resultados.push(vianda); // En caso de que en alguno de los datos de "infoDos" haya coincidencia, lo pusheo al array de resultados
+    seleccionVianda();
+  } else {
+    alert("Por favor, seleccionar una cantidad de viandas del 1 al 10.");
+    cantidadProducto();
+  }
+  function seleccionVianda() {
+    for (let i = 1; i <= cantidadViandas; i++) {
+      let tipoVianda = parseInt(
+        prompt(
+          "Qué vianda querés agregar a tu compra?\n1 - Curry de Garbanzos\n2 - Pollo con Arroz\n3 - Milanesa con Pure\n4 - Sandwich vegetariano\n5 - Bife con ensalada\n6 - Fideos con tuco"
+        )
+      );
+      if (i <= cantidadViandas) {
+        switch (tipoVianda) {
+          case 1:
+            totalPrecio += precioViandaUno;
+            totalProductos += 1;
+            console.log(`Valor de vianda numero ${i} es: $` + precioViandaUno);
+            break;
+          case 2:
+            totalPrecio += precioViandaDos;
+            totalProductos += 1;
+            console.log(`Valor de vianda numero ${i} es: $` + precioViandaDos);
+            break;
+          case 3:
+            totalPrecio += precioViandaTres;
+            totalProductos += 1;
+            console.log(`Valor de vianda numero ${i} es: $` + precioViandaTres);
+            break;
+          case 4:
+            totalPrecio += precioViandaCuatro;
+            totalProductos += 1;
+            console.log(
+              `Valor de vianda numero ${i} es: $` + precioViandaCuatro
+            );
+            break;
+          case 5:
+            totalPrecio += precioViandaCinco;
+            totalProductos += 1;
+            console.log(
+              `Valor de vianda numero ${i} es: $` + precioViandaCinco
+            );
+            break;
+          case 6:
+            totalPrecio += precioViandaSeis;
+            totalProductos += 1;
+            console.log(`Valor de vianda numero ${i} es: $` + precioViandaSeis);
+            break;
+          default:
+            alert(
+              "Seleccionar entre las 6 opciones usando un valor del 1 al 6."
+            );
+            i--;
+            break;
+        }
       }
     }
   }
-  if (
-    // Condicional si no encuentra resultado, o se carga vacía la busqueda
-    resultados.length === 0 ||
-    inputBusqueda === "" ||
-    inputBusqueda === " "
-  ) {
-    alert(
-      `Disculpanos! No logramos encontrar ninguna vianda que contenga "${inputBusqueda}". Intenta nuevamente con alguna otra palabra clave!`
-    );
-    buscarPorTexto(); // Volvemos a ejecutar
-  } else {
-    // Condicional else, donde genero un bucle por cada resultado que haya coincidido
-    console.log("Estos fueron los resultados que hemos encontrado:");
-    for (let i = 0; i < resultados.length; i++) {
-      const coincidencia = resultados[i]; // Declaro "coincidencia" como objeto (con todos sus valores) correspondientes al indice del ciclo
-      console.log(
-        // Llamo a la consola para mostrar los resultados
-        `Vianda nro. ${coincidencia.id} - ${coincidencia.nombre}: Rinde ${coincidencia.porciones} porciones, con un valor de $${coincidencia.precio}. Tené en cuenta que esta vianda es para dieta tipo ${coincidencia.tipo}.`
-      );
-    }
-    alert("Los resultados se han mostrado en la consola!");
-    agregarAlCarrito();
-  }
+  alert(`El valor total de tu compra es de $${totalPrecio}`);
+  console.log(`El valor total de tu compra es de $${totalPrecio}`);
+  cierreVenta();
 }
 
-// Sumar al carrito (futuro boton)
-function agregarAlCarrito() {
-  const addVerificar = prompt(
-    "Desea agregar alguna vianda al carrito?\nResponda con si o no."
-  );
-  if (addVerificar != "") {
-    switch (addVerificar) {
-      case "No":
-      case "NO":
-      case "no":
-        alert("Entendido! en ese caso volveremos al menu de viandas.");
-        navegadorCompra();
-        break;
-      case "Si":
-      case "SI":
-      case "si":
-        const addId = Number(
-          prompt(
-            "Genial! En ese caso escriba el NRO de Vianda que quiera agregar al carrito.\nSi lo desconoce recuerde que puede ver nuestro listado, utilizar nuestro buscado o filtros!"
-          )
-        );
-        const viandaSeleccionada = viandasDisponibles.find(
-          (vianda) => vianda.id == addId
-        );
-        if (addId === 0 || addId > viandasDisponibles.length + 1) {
-          alert(
-            `Disculpanos! No logramos encontrar ninguna vianda que coincida con el NRO ${addId}. Intenta nuevamente con alguna otra palabra clave!`
-          );
-          agregarAlCarrito();
-        } else {
-          console.log("Hemos agregado la siguiente vianda a tu carrito:");
-          carritoCompra.push(viandaSeleccionada);
-          totalPrecio += viandaSeleccionada.precio;
-          console.log(
-            `Vianda nro. ${viandaSeleccionada.id} - ${viandaSeleccionada.nombre}: Rinde ${viandaSeleccionada.porciones} porciones, con un valor de $${viandaSeleccionada.precio}.`
-          );
-          console.log(
-            "El valor total de tu cuenta hasta ahora es de: $" + totalPrecio
-          );
-          alert("Hemos agregado la vianda al carrito!");
-          const deshacer = prompt(
-            "Querés deshacer haber agregado esta vianda al carrito?\nResponde con si o no."
-          );
-          if (deshacer != "") {
-            switch (deshacer) {
-              case "No":
-              case "NO":
-              case "no":
-                alert("Entendido!");
-                agregarAlCarrito();
-                break;
-              case "Si":
-              case "SI":
-              case "si":
-                carritoCompra.shift();
-                totalPrecio -= viandaSeleccionada.precio;
-                console.log(
-                  "El valor total de tu cuenta hasta ahora es de: $" +
-                    totalPrecio
-                );
-                alert("Se ha borrado este item!");
-                agregarAlCarrito();
-                break;
-              default:
-                alert("Por favor, ingresar una respuesta por si o no");
-                deshacerAdd();
-                break;
-            }
-          } else {
-            alert("No ha ingresado ninguna respuesta.");
-            agregarAlCarrito();
-          }
-        }
-        break;
-      default:
-        alert("Por favor, ingresar una respuesta por si o no");
-        agregarAlCarrito();
-        break;
-    }
-  } else {
-    alert("No ha ingresado ninguna respuesta.");
-    agregarAlCarrito();
-  }
-}
-
-/* SECCION CARRITO - Funciones y metodos para visualizar y modificar el carrito */
-function navegadorCarrito() {
-  let opcionNav = Number(
-    prompt(
-      "MENU CARRITO\nA continuación, selecciona la opción de lo que quieras hacer:\n1 - Mostrar mi carrito\n2 - Vaciar mi carrito\n3 - Finalizar mi compra\n4 - Seguir comprando\n5 - Volver al menú principal"
-    )
-  );
-  if (opcionNav != "") {
-    switch (opcionNav) {
-      case 1:
-        mostrarCarrito();
-        break;
-      case 2:
-        vaciarCarrito();
-        break;
-      case 3:
-        finalizarCompra();
-        break;
-      case 4:
-        navegadorCompra();
-        break;
-      case 5:
-        navegadorApp();
-        break;
-      default:
-        alert("Por favor, ingresa el número de alguna de las opciones!");
-        navegadorApp();
-        break;
-    }
-  } else {
-    alert("No ha ingresado ninguna respuesta.");
-    navegadorCarrito();
-  }
-}
-
-// Mostrar carrito
-function mostrarCarrito() {
-  if (carritoCompra != 0) {
-    console.log("TU CARRITO:");
-    carritoCompra.forEach((vianda, indice) => {
-      console.log(
-        `${indice + 1} - Vianda NRO ${vianda.id} | ${vianda.nombre}: Rinde ${
-          vianda.porciones
-        } porciones, con un valor de $${
-          vianda.precio
-        }. Tené en cuenta que esta vianda es para dieta tipo ${vianda.tipo}.`
-      );
-    });
-    console.log("El total de tu cuenta a pagar es de: $" + totalPrecio);
-    alert("La info del carrito se ha mostrado en la consola!");
-    navegadorCarrito();
-  } else {
-    alert("El carrito está vacío! Probá agregando algunas viandas!");
-    navegadorApp();
-  }
-}
-
-// Vaciar carrito
-function vaciarCarrito() {
-  carritoCompra.splice(0, carritoCompra.length);
-  totalPrecio = 0;
-  alert("Se ha vaciado el carrito!");
-  console.log("El valor total de tu cuenta se ha revertido a: $" + totalPrecio);
-  navegadorCompra();
-}
-
-// Finalizar compra
-function finalizarCompra() {
+//La tercera funcion tiene como fin confirmar la compra
+function cierreVenta() {
   let ventaFinal = prompt(
-    `${nombreUsuario} deseas comprar tus productos por un total de ${totalPrecio} para ser enviadas a ${direccionUsuario}?\nPor favor, responde por si o no.`
+    `${nombreUsuario} deseas comprar ${totalProductos} cantidad de viandas al precio total de $${totalPrecio} para ser enviadas (SIN CARGO!) a la dirección ${direccionUsuario}?\nPor favor, responder con Si o No`
   );
   if (ventaFinal != "") {
     switch (ventaFinal) {
-      case "Si":
       case "SI":
+      case "Si":
       case "si":
         alert(
-          `Perfecto! Nos estaremos contactando contigo a tu dirección de e-mail ${emailUsuario} para coordinar el pago y la entrega.\nMuchas gracias por usar Bon AppetEat!`
+          "Perfecto! Nos estaremos contactando contigo para coordinar la entrega y el pago\nGracias por comprar en Bon AppetEat!"
+        );
+        console.log(
+          "Perfecto! Nos estaremos contactando contigo para coordinar la entrega y el pago\nGracias por comprar en Bon AppetEat!"
         );
         break;
-      case "No":
       case "NO":
+      case "No":
       case "no":
-        alert("En ese caso, volvamos al menu principal!");
-        navegadorApp();
+        alert(
+          "En ese caso, volvamos a elegir los productos que quieras llevarte!"
+        );
+        totalPrecio *= 0;
+        totalProductos *= 0;
+        cantidadProducto();
         break;
       default:
-        alert("Por favor, ingresar una respuesta por si o no.");
-        finalizarCompra();
+        alert("Por favor, ingresar una respuesta por si o no");
+        cierreVenta();
         break;
     }
   } else {
-    alert("No ha ingresado ninguna respuesta");
-    finalizarCompra();
+    alert("No ha ingresado ninguna respuesta.");
+    cierreVenta();
   }
 }
-
-inputUsuario();
