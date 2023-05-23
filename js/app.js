@@ -1,10 +1,6 @@
 // Declaración de variables globales, objetos y arrays sobre viandas e-commerce
 let totalPrecio = 0;
 
-const inputSearch = document.getElementById("buscadorIndex");
-const buttonSearch = document.getElementById("botonBuscador");
-const returnSearch = document.getElementById("resBuscador");
-
 function Viandas(nombre, porciones, categoria, precio, tipo) {
   this.nombre = nombre;
   this.porciones = porciones;
@@ -65,6 +61,21 @@ const viandasDisponibles = [
   fideosTuco,
 ];
 
+const inputSearch = document.getElementById("buscadorIndex");
+const buttonSearch = document.getElementById("botonBuscador");
+const returnSearch = document.getElementById("resBuscador");
+
+const carrito = JSON.parse(localStorage.getItem("carritoLocal")) || [];
+const carritoElemento = document.querySelector("#carritoActivo");
+const totalPrecioElemento = document.querySelector("#carritoPrecio");
+
+const form = document.querySelector("#form");
+const inputName = document.querySelector("#inputName");
+const inputEmail = document.querySelector("#inputEmail");
+const respuesta = document.querySelector("#respuesta");
+
+refreshCarrito();
+
 /* Declaración de cards de viandas según arrays */
 
 for (let vianda of viandasDisponibles) {
@@ -86,7 +97,6 @@ for (let vianda of viandasDisponibles) {
 }
 
 /* Funcionamiento del buscador */
-
 buttonSearch.addEventListener("click", function (event) {
   event.preventDefault();
   const inputSearchTolowercase = inputSearch.value.toLowerCase();
@@ -149,6 +159,7 @@ document.querySelectorAll(".add").forEach((button, index) => {
 
 function addVianda(item) {
   carrito.push(item);
+  localStorage.setItem("carritoLocal", JSON.stringify(carrito));
   refreshCarrito();
 }
 
@@ -182,6 +193,7 @@ document.getElementById("carritoEmpty").addEventListener("click", function () {
   carrito.splice(0, carrito.length);
   document.getElementById("carritoActivo").innerHTML = "";
   document.getElementById("carritoPrecio").innerHTML = "";
+  localStorage.setItem("carritoLocal", JSON.stringify(carrito));
 });
 
 /* Borrar un elemento del carrito*/
@@ -189,20 +201,16 @@ function deleteCarrito(index) {
   const item = carrito[index];
   totalPrecio -= item.precio;
   carrito.splice(index, 1);
+  localStorage.setItem("carritoLocal", JSON.stringify(carrito));
   refreshCarrito();
 }
 
 /* Funcionamiento formulario */
-const form = document.querySelector("#form");
-const inputName = document.querySelector("#inputName");
-const inputEmail = document.querySelector("#inputEmail");
-const respuesta = document.querySelector("#respuesta");
-
 form.addEventListener("submit", infoUsuario);
 
 function infoUsuario(e) {
   e.preventDefault();
-  if (inputName.value === "" || inputEmail.value === "") {
+  if (inputName.value === "" || inputEmail === "") {
     let respuestaNo = document.createElement("div");
     respuestaNo.innerHTML = `<h5>Asegurate de completar ambos campos para poder avanzar con tu compra!</h5>`;
     document.querySelector("#respuesta").innerHTML = "";
