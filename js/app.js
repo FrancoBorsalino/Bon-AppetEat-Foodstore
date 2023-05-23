@@ -1,6 +1,15 @@
 // Declaración de variables globales, objetos y arrays sobre viandas e-commerce
 let totalPrecio = 0;
 
+const inputSearch = document.getElementById("buscadorIndex");
+const buttonSearch = document.getElementById("botonBuscador");
+const returnSearch = document.getElementById("resBuscador");
+
+const carrito = [];
+const carritoElemento = document.querySelector("#carritoActivo");
+const totalPrecioElemento = document.querySelector("#carritoPrecio");
+carrito = JSON.parse(localStorage.getItem("carritoActivo")) || [];
+
 function Viandas(nombre, porciones, categoria, precio, tipo) {
   this.nombre = nombre;
   this.porciones = porciones;
@@ -83,10 +92,6 @@ for (let vianda of viandasDisponibles) {
 
 /* Funcionamiento del buscador */
 
-const inputSearch = document.getElementById("buscadorIndex");
-const buttonSearch = document.getElementById("botonBuscador");
-const returnSearch = document.getElementById("resBuscador");
-
 buttonSearch.addEventListener("click", function (event) {
   event.preventDefault();
   const inputSearchTolowercase = inputSearch.value.toLowerCase();
@@ -139,12 +144,6 @@ buttonSearch.addEventListener("click", function (event) {
     });
   }
 });
-
-/* Declaración del carrito + metodos */
-const carrito = [];
-
-const carritoElemento = document.querySelector("#carritoActivo");
-const totalPrecioElemento = document.querySelector("#carritoPrecio");
 
 /* Push de un elemento al carrito */
 document.querySelectorAll(".add").forEach((button, index) => {
