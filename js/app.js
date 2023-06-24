@@ -1,233 +1,367 @@
-// Declaración de variables globales, objetos y arrays sobre viandas e-commerce
-let totalPrecio = 0;
+/* -------------------- DECLARACIÓN DE ARRAYS Y OBJETOS -------------------- */
+const viandasDisponibles = [
+  {
+    id: "viandaUno",
+    nombre: "Curry con Garbanzos",
+    porciones: 5,
+    precio: 16700,
+    tipo: "Vegano, Vegetariano",
+    img: "https://www.gourmet.cl/wp-content/uploads/2022/08/curry-de-garbanzos-ajustada-web-570x458.jpg",
+    cantidad: 1,
+  },
+  {
+    id: "viandaDos",
+    nombre: "Pollo con Arroz",
+    porciones: 4,
+    precio: 13200,
+    tipo: "Carne",
+    img: "https://www.cocinacaserayfacil.net/wp-content/uploads/2018/06/Arroz-blanco-con-pollo-y-verduras.jpg",
+    cantidad: 1,
+  },
+  {
+    id: "viandaTres",
+    nombre: "Milanesa con Pure",
+    porciones: 4,
+    precio: 18300,
+    tipo: "Carne",
+    img: "https://www.indega.com.py/primicia/wp-content/uploads/2022/04/pure-de-papa-con-pollo-broaster-large-qlJiPE4lyS.jpeg",
+    cantidad: 1,
+  },
+  {
+    id: "viandaCuatro",
+    nombre: "Sandwich Vegano",
+    porciones: 6,
+    precio: 14900,
+    tipo: "Vegano, Vegetariano",
+    img: "https://img.cocinarico.es/2020-09/sandwich-vegano-1.jpg",
+    cantidad: 1,
+  },
+  {
+    id: "viandaCinco",
+    nombre: "Bife con Ensalada",
+    porciones: 4,
+    precio: 1710,
+    tipo: "Carne",
+    img: "https://assets.unileversolutions.com/recipes-v2/35307.jpg",
+    cantidad: 1,
+  },
+  {
+    id: "viandaSeis",
+    nombre: "Fideos con Tuco",
+    porciones: 3,
+    precio: 12400,
+    tipo: "Vegetariano",
+    img: "https://www.diariamenteali.com/medias/receta-de-spaghetti-a-los.cuatro-quesos-1900Wx500H?context=bWFzdGVyfHJvb3R8MTkwMTY3fGltYWdlL2pwZWd8aDM2L2gyYS85MDc0MjEzNzgxNTM0L3JlY2V0YS1kZS1zcGFnaGV0dGktYS1sb3MuY3VhdHJvLXF1ZXNvc18xOTAwV3g1MDBIfDIzYTk1NGU0MDNhOTAyOWIwZjRlYzNhY2YyMzhjNmMzY2VhOTUxNjU1YWZlNzVhNTlkOWZkNTUyNGRkOGYyYzg",
+    cantidad: 1,
+  },
+];
 
-const carrito = JSON.parse(localStorage.getItem("carritoLocal")) || [];
+/* -------------------- DECLARACIÓN DE VARIABLES GLOBALES -------------------- */
+let totalPrecio = 0;
+let carrito = JSON.parse(localStorage.getItem("carritoLocal")) || []; // Recupero carrito de LocalStorage o declaro vacío
+
 const carritoElemento = document.querySelector("#carritoActivo");
 const totalPrecioElemento = document.querySelector("#carritoPrecio");
 
-const inputSearch = document.getElementById("buscadorIndex");
-const buttonSearch = document.getElementById("botonBuscador");
-const returnSearch = document.getElementById("resBuscador");
+const inputSearch = document.querySelector("#buscadorIndex");
+const buttonSearch = document.querySelector("#botonBuscador");
+const returnSearch = document.querySelector("#resBuscador");
 
+const filtroCarne = document.querySelector("#filtroCarne");
+const filtroVeggie = document.querySelector("#filtroVegetariano");
+const filtroVegan = document.querySelector("#filtroVegano");
+
+let botonAddProducto = document.querySelectorAll(".add");
+let botonDViandaCarrito = document.querySelectorAll(".delete__carrito");
+let botonMoreVianda = document.querySelectorAll(".more__vianda");
+let botonLessVianda = document.querySelectorAll(".less__vianda");
+const botonVaciarCarrito = document.querySelector("#carritoEmpty");
+const botonForm = document.querySelector("#botonComprar");
+
+const sectionForm = document.querySelector("#formCompra");
 const form = document.querySelector("#form");
 const inputName = document.querySelector("#inputName");
 const inputEmail = document.querySelector("#inputEmail");
 const respuesta = document.querySelector("#respuesta");
 
-/* Constructor de Array + productos de mi e-commerce */
-function Viandas(id, nombre, porciones, categoria, precio, tipo, img) {
-  this.id = id;
-  this.nombre = nombre;
-  this.porciones = porciones;
-  this.categoria = categoria;
-  this.precio = precio;
-  this.tipo = tipo;
-  this.img = img;
-}
-
-const curryGarbanzos = new Viandas(
-  1,
-  "Curry de Garbanzos",
-  5,
-  "Guisos y pastas",
-  16700,
-  "Vegano, Vegetariano",
-  "https://www.gourmet.cl/wp-content/uploads/2022/08/curry-de-garbanzos-ajustada-web-570x458.jpg"
-);
-const polloArroz = new Viandas(
-  2,
-  "Pollo con Arroz",
-  4,
-  "Minutas",
-  13200,
-  "Con carne",
-  "https://www.cocinacaserayfacil.net/wp-content/uploads/2018/06/Arroz-blanco-con-pollo-y-verduras.jpg"
-);
-const milaPure = new Viandas(
-  3,
-  "Milanesa con Pure",
-  4,
-  "Minutas",
-  18300,
-  "Con carne",
-  "https://www.indega.com.py/primicia/wp-content/uploads/2022/04/pure-de-papa-con-pollo-broaster-large-qlJiPE4lyS.jpeg"
-);
-const sandVege = new Viandas(
-  4,
-  "Sandwich Vegano",
-  6,
-  "Sandwiches",
-  14900,
-  "Vegano, Vegetariano",
-  "https://img.cocinarico.es/2020-09/sandwich-vegano-1.jpg"
-);
-const bifeEnsalada = new Viandas(
-  5,
-  "Bife con Ensalada",
-  4,
-  "Minutas",
-  1710,
-  "Con carne",
-  "https://assets.unileversolutions.com/recipes-v2/35307.jpg"
-);
-const fideosCuatroQuesos = new Viandas(
-  6,
-  "Fideos Cuatro Quesos",
-  3,
-  "Guisos y pastas",
-  12400,
-  "Vegetariano",
-  "https://www.diariamenteali.com/medias/receta-de-spaghetti-a-los.cuatro-quesos-1900Wx500H?context=bWFzdGVyfHJvb3R8MTkwMTY3fGltYWdlL2pwZWd8aDM2L2gyYS85MDc0MjEzNzgxNTM0L3JlY2V0YS1kZS1zcGFnaGV0dGktYS1sb3MuY3VhdHJvLXF1ZXNvc18xOTAwV3g1MDBIfDIzYTk1NGU0MDNhOTAyOWIwZjRlYzNhY2YyMzhjNmMzY2VhOTUxNjU1YWZlNzVhNTlkOWZkNTUyNGRkOGYyYzg"
-);
-
-const viandasDisponibles = [
-  curryGarbanzos,
-  polloArroz,
-  milaPure,
-  sandVege,
-  bifeEnsalada,
-  fideosCuatroQuesos,
-];
-
+/* -------------------- INCIALIZACIÓN POR FUNCIONES -------------------- */
+mostrarVidriera(viandasDisponibles);
 refreshCarrito();
 
-/* Declaración de cards de viandas según arrays */
-
-for (let vianda of viandasDisponibles) {
-  let elemento = document.createElement("div");
-  elemento.innerHTML = `
+/* -------------------- FUNCIONAMIENTO DE VIDRIERA -------------------- */
+function mostrarVidriera(arrayViandas) {
+  arrayViandas.forEach((vianda) => {
+    const cardVidriera = document.createElement("div");
+    cardVidriera.innerHTML = `
         <div class="card-body"> 
           <img class="card-img-top" src="${vianda.img}">
             <p class="card-title robotoBold">${vianda.nombre}</p>
             <p class="card-text robotoRegular">Cantidad de porciones: ${vianda.porciones}</p>
-            <p class="card-text robotoRegular">Categoría: ${vianda.categoria}</p>
             <p class="card-text robotoRegular">Valor: $${vianda.precio}</p>
             <p class="card-text robotoSemiBold">Tipo de vianda: ${vianda.tipo}</p>
-            <button id="botonAddCarrito" class="add">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
+            <button id="${vianda.id}" class="add botonAddCarrito">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
                 alt="Agregar al carrito"></button>
         </div>
-    
     `;
-
-  document.querySelector(".cardsViandas").appendChild(elemento);
+    document.querySelector(".cardsViandas").append(cardVidriera);
+  });
+  refreshBotonesAdd();
 }
 
-/* Funcionamiento del buscador */
-buttonSearch.addEventListener("click", function (event) {
+/* -------------------- FUNCIONAMIENTO DE BUSCADOR -------------------- */
+buttonSearch.addEventListener("click", (event) => {
   event.preventDefault();
-  const inputSearchTolowercase = inputSearch.value.toLowerCase();
-  const resultados = [];
-  for (let i = 0; i < viandasDisponibles.length; i++) {
-    const vianda = viandasDisponibles[i];
-    const info = Object.values(vianda);
-    for (let j = 0; j < info.length; j++) {
-      const infox = info[j].toString().toLowerCase();
-      if (infox.indexOf(inputSearchTolowercase) !== -1) {
-        resultados.push(vianda);
-        break;
-      }
-    }
-  }
-  if (
-    resultados.length === 0 ||
-    inputSearch.value === "" ||
-    inputSearch.value === " "
-  ) {
-    returnSearch.innerHTML = `Disculpanos! No logramos encontrar ninguna vianda que tenga "${inputSearchTolowercase}". Intenta nuevamente con alguna otra palabra clave!`;
-  } else {
-    returnSearch.innerHTML = "";
-    for (let i = 0; i < resultados.length; i++) {
-      const vianda = resultados[i];
-      const cardVianda = `
-            <div class="card-body">
-          <img class="card-img-top" src="${vianda.img}">
-                <p class="card-title robotoBold">${vianda.nombre}</p>
-                <p class="card-text robotoRegular">Cantidad de porciones: ${vianda.porciones}</p>
-                <p class="card-text robotoRegular">Categoría: ${vianda.categoria}</p>
-                <p class="card-text robotoRegular">Valor: $${vianda.precio}</p>
-                <p class="card-text robotoSemiBold">Tipo de vianda: ${vianda.tipo}</p>
-                <button id="botonAddCarrito" class="add">Agregar al carrito <img src="./imgs/carritoLogoBlanco.png"
-                    alt="Agregar al carrito"></button>
-            </div>
-        </div>
-        `;
-      returnSearch.innerHTML += cardVianda;
-
-      document.querySelector(".cardsViandas").innerHTML = "";
-      document.querySelector(".cardsViandas").appendChild(returnSearch);
-    }
-
-    /* IMPORTANTE! Antes no tenía esto, y lo tuve que volver a declarar para que pueda agregar al carrito desde los resultados de la búsqueda. Capaz queda repetitivo o algo hice mal, pero fue la única manera que encontre. Mi razonamiento es que si asigno esta funcion por fuera, en realidad el evento se ejecuta ANTES de lo que el DOM genera el botón del resultado de la búsqueda. Por eso lo terminé asignando aqui tambien */
-    /* Lo otro que me queda resolver, es que no se están asignando correctamente los elementos cuando los sumo en el carrito. Me imagino que tiene que ver con que no está correspondiendo el index con el listado del array de resultado de la busqueda. Pero no me dio ni la cabeza ni el tiempo para encontrarle una solución para esta entrega :( */
-    document.querySelectorAll(".add").forEach((button, index) => {
-      button.addEventListener("click", () => {
-        addVianda(viandasDisponibles[index]);
-      });
-    });
-  }
+  buscarPorTexto(inputSearch);
 });
 
-/* Push de un elemento al carrito */
-document.querySelectorAll(".add").forEach((button, index) => {
-  button.addEventListener("click", () => {
-    addVianda(viandasDisponibles[index]);
+document.querySelector("#botonClear").addEventListener("click", () => {
+  document.querySelector(".cardsViandas").innerHTML = "";
+  mostrarVidriera(viandasDisponibles);
+});
+
+function buscarPorTexto(input) {
+  const inputSearchTLC = input.value.toLowerCase();
+  const resultados = viandasDisponibles.filter((vianda) => {
+    const viandaNombre = vianda.nombre.toLowerCase();
+    const regex = new RegExp(inputSearchTLC, "i");
+    return regex.test(viandaNombre);
+  });
+  resultados.length === 0 ||
+  inputSearch.value === "" ||
+  inputSearch.value.trim() === ""
+    ? (returnSearch.innerHTML = `<h1 class="robotoSemibold">Disculpanos! No logramos encontrar ninguna vianda que tenga "${inputSearchTLC.toUpperCase()}". Intenta nuevamente con algún otro nombre!</h1>`)
+    : ((document.querySelector(".cardsViandas").innerHTML = ""),
+      mostrarVidriera(resultados));
+  refreshBotonesAdd();
+}
+
+/* -------------------- FUNCIONAMIENTO DE FILTROS -------------------- */
+filtroCarne.addEventListener("click", (event) => {
+  event.preventDefault();
+  let viandasFiltradas = viandasDisponibles.filter(
+    (vianda) => vianda.tipo === "Carne"
+  );
+  document.querySelector(".cardsViandas").innerHTML = "";
+  mostrarVidriera(viandasFiltradas);
+  document.querySelectorAll(".add").forEach((button, i) => {
+    button.addEventListener("click", () => {
+      addViandaCarrito(viandasDisponibles[i]);
+    });
   });
 });
 
-function addVianda(item) {
-  carrito.push(item);
-  localStorage.setItem("carritoLocal", JSON.stringify(carrito));
-  refreshCarrito();
+filtroVeggie.addEventListener("click", (event) => {
+  event.preventDefault();
+  let viandasFiltradas = viandasDisponibles.filter(
+    (vianda) =>
+      vianda.tipo === "Vegetariano" || vianda.tipo === "Vegano, Vegetariano"
+  );
+  document.querySelector(".cardsViandas").innerHTML = "";
+  mostrarVidriera(viandasFiltradas);
+  document.querySelectorAll(".add").forEach((button, i) => {
+    button.addEventListener("click", () => {
+      addViandaCarrito(viandasDisponibles[i]);
+    });
+  });
+});
+
+filtroVegan.addEventListener("click", (event) => {
+  event.preventDefault();
+  let viandasFiltradas = viandasDisponibles.filter(
+    (vianda) => vianda.tipo === "Vegano, Vegetariano"
+  );
+  document.querySelector(".cardsViandas").innerHTML = "";
+  mostrarVidriera(viandasFiltradas);
+  document.querySelectorAll(".add").forEach((button, i) => {
+    button.addEventListener("click", () => {
+      addViandaCarrito(viandasDisponibles[i]);
+    });
+  });
+});
+
+/* -------------------- FUNCIONAMIENTO DEL CARRITO -------------------- */
+
+function toggleCarrito() {
+  carrito.length === 0
+    ? (carritoSection.classList.remove("activo"),
+      carritoSection.classList.add("oculto"))
+    : (carritoSection.classList.remove("oculto"),
+      carritoSection.classList.add("activo"));
 }
 
 function refreshCarrito() {
   carritoElemento.innerHTML = "";
   totalPrecio = 0;
-  carrito.forEach((item) => {
+  carrito.forEach((producto) => {
     const viandaCarritoElemento = document.createElement("div");
-    viandaCarritoElemento.classList.add("producto");
+    viandaCarritoElemento.classList.add("carrito__layout");
     viandaCarritoElemento.innerHTML = `
-        <h3> ${item.nombre}</h3>
-        <p>Cantidad de porciones: ${item.porciones} gr.</p>
-        <p>Precio: $ ${item.precio}</p>
-        <p>Tipo: ${item.tipo}</p>
-        <button type="button" class="delete__carrito btn btn-dark">Quitar del carrito</button>
+    <img src="${producto.img}">
+    <div class="producto">
+        <p class="robotoBold"> ${producto.nombre}</p>
+        <p class="robotoRegular">Cantidad de porciones: <b class="robotoSemibold">${
+          producto.porciones * producto.cantidad
+        }</b></p>
+        <p class="robotoRegular">Precio por producto: <b>$${
+          producto.precio
+        }</b></p>
+        <p class="robotoRegular">Tipo: ${producto.tipo}</p>
+            <p class="robotoBold">Cantidad: ${producto.cantidad}</p>
+        </div>
+          <em class ="robotoSemiBold">Subtotal: $${
+            producto.cantidad * producto.precio
+          }</em>
+          <div class="botonera__carrito">
+            <button tpye="button" class="less__vianda" id="sub__${
+              producto.id
+            }">-</button>
+            <button type="button" class="delete__carrito botonDeduceCarrito" id="${
+              producto.id
+            }">Eliminar todas</button>
+            <button tpye="button" class="more__vianda" id="add__${
+              producto.id
+            }">+</button>
+          </div>
         `;
     carritoElemento.appendChild(viandaCarritoElemento);
-    totalPrecio += item.precio;
+    totalPrecio += producto.precio * producto.cantidad;
   });
-  totalPrecioElemento.innerHTML = `Hasta ahora, acumulás un total de $${totalPrecio} en viandas!`;
-  document.querySelectorAll(".delete__carrito").forEach((button, index) => {
-    button.addEventListener("click", () => {
-      deleteCarrito(index);
-    });
-  });
+  totalPrecioElemento.innerHTML = `<p class="robotoBold">Hasta ahora, acumulás un total de $${totalPrecio} en viandas!</p>`;
+  refreshBotonesCarrito();
+  toggleCarrito();
 }
 
-/* Vaciado del carrito */
-
-document.getElementById("carritoEmpty").addEventListener("click", function () {
-  carrito.splice(0, carrito.length);
-  document.getElementById("carritoActivo").innerHTML = "";
-  document.getElementById("carritoPrecio").innerHTML = "";
+function addViandaCarrito(e) {
+  const viandaId = e.currentTarget.id;
+  const viandaDeseada = viandasDisponibles.find(
+    (vianda) => vianda.id === viandaId
+  );
+  carrito.some((vianda) => vianda.id === viandaId)
+    ? (() => {
+        const index = carrito.findIndex((vianda) => vianda.id === viandaId);
+        carrito[index].cantidad++;
+      })()
+    : carrito.push(viandaDeseada);
+  Toastify({
+    text: `Se agregó al carrito: ${viandaDeseada.nombre}`,
+    duration: 3500,
+    newWindow: true,
+    close: true,
+    gravity: "top",
+    position: "center",
+    stopOnFocus: true,
+    style: {
+      background: "linear-gradient(to right, #e6572c, #e6572c)",
+    },
+  }).showToast();
   localStorage.setItem("carritoLocal", JSON.stringify(carrito));
-});
+  refreshCarrito();
+}
 
-/* Borrar un elemento del carrito*/
-function deleteCarrito(index) {
-  const item = carrito[index];
-  totalPrecio -= item.precio;
+function deleteViandaCarrito(e) {
+  const viandaId = e.currentTarget.id;
+  const index = carrito.findIndex((vianda) => vianda.id === viandaId);
+  Toastify({
+    text: `Se eliminaron del carrito: ${carrito[index].nombre}`,
+    duration: 3500,
+    newWindow: true,
+    close: true,
+    gravity: "top",
+    position: "center",
+    stopOnFocus: true,
+    style: {
+      background: "linear-gradient(to right, #00645a, #00645a)",
+    },
+  }).showToast();
+  carrito[index].cantidad = 1;
   carrito.splice(index, 1);
   localStorage.setItem("carritoLocal", JSON.stringify(carrito));
   refreshCarrito();
 }
 
-/* Funcionamiento formulario */
-form.addEventListener("submit", infoUsuario);
+function moreViandaCarrito(e) {
+  const viandaId = e.currentTarget.id.replace("add__", "");
+  const index = carrito.findIndex((vianda) => vianda.id === viandaId);
+  carrito[index].cantidad++;
+  localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+  refreshCarrito();
+}
+
+function lessViandaCarrito(e) {
+  const viandaId = e.currentTarget.id.replace("sub__", "");
+  const index = carrito.findIndex((vianda) => vianda.id === viandaId);
+  carrito[index].cantidad > 1
+    ? carrito[index].cantidad--
+    : carrito.splice(index, 1);
+  localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+  refreshCarrito();
+}
+
+function vaciarCarrito() {
+  Swal.fire({
+    title: "¿Estas seguro de querer vaciar tu carrito?",
+    text: "¡Tendrás que volver a armarlo si aceptas!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#e6572c",
+    cancelButtonColor: "#00645a",
+    confirmButtonText: "Vaciar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      carrito = [];
+      totalPrecio = 0;
+      localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+      sectionForm.classList.remove("activo");
+      sectionForm.classList.add("oculto");
+      Swal.fire({
+        icon: "success",
+        title: "¡Se ha vaciado tu carrito!",
+        confirmButtonColor: "#FF5733",
+      });
+      refreshCarrito();
+    }
+  });
+}
+
+function refreshBotonesAdd() {
+  botonAddProducto = document.querySelectorAll(".add");
+  botonAddProducto.forEach((button) => {
+    button.addEventListener("click", addViandaCarrito);
+  });
+}
+
+function refreshBotonesCarrito() {
+  botonDViandaCarrito = document.querySelectorAll(".delete__carrito");
+  botonDViandaCarrito.forEach((button) => {
+    button.addEventListener("click", deleteViandaCarrito);
+  });
+  botonLessVianda = document.querySelectorAll(".less__vianda");
+  botonLessVianda.forEach((button) => {
+    button.addEventListener("click", lessViandaCarrito);
+  });
+  botonMoreVianda = document.querySelectorAll(".more__vianda");
+  botonMoreVianda.forEach((button) => {
+    button.addEventListener("click", moreViandaCarrito);
+  });
+  botonVaciarCarrito.addEventListener("click", vaciarCarrito);
+  botonForm.addEventListener("click", toggleForm);
+}
+
+/* -------------------- FUNCIONAMIENTO DEL FORMULARIO -------------------- */
+
+function toggleForm() {
+  carrito.length === 0
+    ? (sectionForm.classList.remove("activo"),
+      sectionForm.classList.add("oculto"))
+    : (sectionForm.classList.remove("oculto"),
+      sectionForm.classList.add("activo"));
+  form.addEventListener("submit", infoUsuario);
+}
 
 function infoUsuario(e) {
   e.preventDefault();
-  if (inputName.value === "" || inputEmail === "") {
+  if (inputName.value === "" || inputEmail.value === "") {
     let respuestaNo = document.createElement("div");
     respuestaNo.innerHTML = `<h5>Asegurate de completar ambos campos para poder avanzar con tu compra!</h5>`;
     document.querySelector("#respuesta").innerHTML = "";
@@ -238,14 +372,20 @@ function infoUsuario(e) {
     <p>Hemos enviado nuestra información de contacto para avanzar con la compra. Muchas gracias!</p>`;
     document.querySelector("#respuesta").innerHTML = "";
     document.querySelector("#respuesta").appendChild(respuestaSi);
+    carrito = [];
+    localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+    Swal.fire({
+      imageUrl: "../imgs/logoBodyIndex.png",
+      imageHeight: 150,
+      imageWidth: 245,
+      title: "¡Gracias por confiar en nosotros!",
+      text: "Te estaremos contactando por mail para finalizar la compra",
+      confirmButtonColor: "#FF5733",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        refreshCarrito();
+        toggleForm();
+      }
+    });
   }
 }
-
-/* filtros que no se me ocurrió como aplicarlo en el HTML, pero que dejo el código de cómo funcionaria */
-
-let filterPrecio = viandasDisponibles.filter((item) => item.precio >= 15000);
-let filterVeggie = viandasDisponibles.filter(
-  (item) => item.tipo === "Vegetariano" || item.tipo === "Vegano, Vegetariano"
-);
-let filterVegan = viandasDisponibles.filter((item) => item.tipo === "Vegano");
-let filterMeat = viandasDisponibles.filter((item) => item.tipo === "Con Carne");

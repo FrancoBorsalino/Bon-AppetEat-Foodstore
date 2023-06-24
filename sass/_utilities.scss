@@ -1,6 +1,6 @@
-$color-primario: rgb(230, 87, 44);
-$color-secundario: rgb(0, 100, 90, 1);
-$color-blanco: rgb(255, 255, 255);
+$color-primario: rgb(230, 87, 44); // #e6572c
+$color-secundario: rgb(0, 100, 90); // #00645a
+$color-blanco: rgb(255, 255, 255); // #ffffff
 
 @mixin flex_R-SB-C-NW {
     display: flex;
