@@ -49,31 +49,37 @@
             <div class="buscador">
                 <img src="./imgs/iconoBuscador.png" alt="Lupa de busqueda">
                 <input class="buscador__barra robotoRegular" id="buscadorIndex" type="search"
-                    name="buscadorRecetasIndex" placeholder="Buscá tus viandas favoritas!">
+                    name="buscadorRecetasIndex" placeholder="Buscá por el nombre de tus viandas favoritas!">
                 <button id="botonBuscador">Buscar ahora!</button>
+                <button id="botonClear">Quitar filtros</button>
             </div>
-            <div id="resBuscador"></div>
+            <div>
+                <button id="filtroCarne">Viandas con Carne</button>
+                <button id="filtroVegetariano">Viandas Vegetarianas</button>
+                <button id="filtroVegano">Viandas Veganas</button>
+            </div>
         </section>
         <section class="recetas grid__recetas grid__padding--left grid__padding--right">
             <!-- Seccion recetas destacadas -->
             <h1 class="robotoBold">¡Elegí entre las viandas más populares de esta semana!</h1>
-            <article class="recetas__cards cardsViandas" id="product">
+            <article class="recetas__cards cardsViandas" id="resBuscador">
             </article>
         </section>
         <section class="grid__carritoIndex grid__padding--left grid__padding--right"> <!-- Carrito interactivo -->
-            <div class="carrito">
+            <div id="carritoSection" class="carrito oculto">
                 <h4>Tu Carrito</h4>
-                <em>Tus productos seleccionados...</em>.
                 <div class="container-cart" id="carritoActivo">
                 </div>
                 <div id="carritoPrecio">
                 </div>
                 <div>
                     <button type="button" id="carritoEmpty" class="btn btn-outline-primary">Vaciar Carrito</button>
+                    <button type="button" id="botonComprar" class="btn btn-outline-primary">Comprar Viandas</button>
                 </div>
             </div>
         </section>
-        <section class="grid__formEntrega grid__padding--left grid__padding--right"> <!-- Form de entrega (B) -->
+        <section id="formCompra" class="grid__formEntrega grid__padding--left grid__padding--right oculto">
+            <!-- Form de entrega (B) -->
             <h3 class="robotoBold">Completá el formulario para entregar tus productos:</h3>
             <form id="form">
                 <h3>Formulario de Contacto</h3>
@@ -304,7 +310,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-    <script src="./js/app.js"></script>
+    <script src="./js/appA.js"></script>
 </body>
 
 </html>

@@ -1,55 +1,83 @@
 // Declaración de variables globales, objetos y arrays sobre viandas e-commerce
 let totalPrecio = 0;
 
-function Viandas(nombre, porciones, categoria, precio, tipo) {
+const carrito = JSON.parse(localStorage.getItem("carritoLocal")) || [];
+const carritoElemento = document.querySelector("#carritoActivo");
+const totalPrecioElemento = document.querySelector("#carritoPrecio");
+
+const inputSearch = document.getElementById("buscadorIndex");
+const buttonSearch = document.getElementById("botonBuscador");
+const returnSearch = document.getElementById("resBuscador");
+
+const form = document.querySelector("#form");
+const inputName = document.querySelector("#inputName");
+const inputEmail = document.querySelector("#inputEmail");
+const respuesta = document.querySelector("#respuesta");
+
+/* Constructor de Array + productos de mi e-commerce */
+function Viandas(id, nombre, porciones, categoria, precio, tipo, img) {
+  this.id = id;
   this.nombre = nombre;
   this.porciones = porciones;
   this.categoria = categoria;
   this.precio = precio;
   this.tipo = tipo;
+  this.img = img;
 }
 
 const curryGarbanzos = new Viandas(
+  1,
   "Curry de Garbanzos",
   5,
   "Guisos y pastas",
   16700,
-  "Vegano, Vegetariano"
+  "Vegano, Vegetariano",
+  "https://www.gourmet.cl/wp-content/uploads/2022/08/curry-de-garbanzos-ajustada-web-570x458.jpg"
 );
 const polloArroz = new Viandas(
+  2,
   "Pollo con Arroz",
   4,
   "Minutas",
   13200,
-  "Con carne"
+  "Con carne",
+  "https://www.cocinacaserayfacil.net/wp-content/uploads/2018/06/Arroz-blanco-con-pollo-y-verduras.jpg"
 );
 const milaPure = new Viandas(
+  3,
   "Milanesa con Pure",
   4,
   "Minutas",
   18300,
-  "Con carne"
+  "Con carne",
+  "https://www.indega.com.py/primicia/wp-content/uploads/2022/04/pure-de-papa-con-pollo-broaster-large-qlJiPE4lyS.jpeg"
 );
 const sandVege = new Viandas(
+  4,
   "Sandwich Vegano",
   6,
   "Sandwiches",
   14900,
-  "Vegano, Vegetariano"
+  "Vegano, Vegetariano",
+  "https://img.cocinarico.es/2020-09/sandwich-vegano-1.jpg"
 );
 const bifeEnsalada = new Viandas(
+  5,
   "Bife con Ensalada",
   4,
   "Minutas",
   1710,
-  "Con carne"
+  "Con carne",
+  "https://assets.unileversolutions.com/recipes-v2/35307.jpg"
 );
-const fideosTuco = new Viandas(
-  "Fideos con Tuco",
+const fideosCuatroQuesos = new Viandas(
+  6,
+  "Fideos Cuatro Quesos",
   3,
   "Guisos y pastas",
   12400,
-  "Vegetariano"
+  "Vegetariano",
+  "https://www.diariamenteali.com/medias/receta-de-spaghetti-a-los.cuatro-quesos-1900Wx500H?context=bWFzdGVyfHJvb3R8MTkwMTY3fGltYWdlL2pwZWd8aDM2L2gyYS85MDc0MjEzNzgxNTM0L3JlY2V0YS1kZS1zcGFnaGV0dGktYS1sb3MuY3VhdHJvLXF1ZXNvc18xOTAwV3g1MDBIfDIzYTk1NGU0MDNhOTAyOWIwZjRlYzNhY2YyMzhjNmMzY2VhOTUxNjU1YWZlNzVhNTlkOWZkNTUyNGRkOGYyYzg"
 );
 
 const viandasDisponibles = [
@@ -58,21 +86,8 @@ const viandasDisponibles = [
   milaPure,
   sandVege,
   bifeEnsalada,
-  fideosTuco,
+  fideosCuatroQuesos,
 ];
-
-const inputSearch = document.getElementById("buscadorIndex");
-const buttonSearch = document.getElementById("botonBuscador");
-const returnSearch = document.getElementById("resBuscador");
-
-const carrito = JSON.parse(localStorage.getItem("carritoLocal")) || [];
-const carritoElemento = document.querySelector("#carritoActivo");
-const totalPrecioElemento = document.querySelector("#carritoPrecio");
-
-const form = document.querySelector("#form");
-const inputName = document.querySelector("#inputName");
-const inputEmail = document.querySelector("#inputEmail");
-const respuesta = document.querySelector("#respuesta");
 
 refreshCarrito();
 
@@ -82,6 +97,7 @@ for (let vianda of viandasDisponibles) {
   let elemento = document.createElement("div");
   elemento.innerHTML = `
         <div class="card-body"> 
+          <img class="card-img-top" src="${vianda.img}">
             <p class="card-title robotoBold">${vianda.nombre}</p>
             <p class="card-text robotoRegular">Cantidad de porciones: ${vianda.porciones}</p>
             <p class="card-text robotoRegular">Categoría: ${vianda.categoria}</p>
@@ -123,7 +139,8 @@ buttonSearch.addEventListener("click", function (event) {
     for (let i = 0; i < resultados.length; i++) {
       const vianda = resultados[i];
       const cardVianda = `
-            <div class="card-body"> 
+            <div class="card-body">
+          <img class="card-img-top" src="${vianda.img}">
                 <p class="card-title robotoBold">${vianda.nombre}</p>
                 <p class="card-text robotoRegular">Cantidad de porciones: ${vianda.porciones}</p>
                 <p class="card-text robotoRegular">Categoría: ${vianda.categoria}</p>
