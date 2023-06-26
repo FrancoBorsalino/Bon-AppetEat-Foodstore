@@ -38,8 +38,6 @@
                         <li><a class="robotoSemibold" href="./pages/recetas.html">Recetas</a></li>
                         <li><a class="robotoSemibold" href="./pages/sobreNosotros.html">Sobre nosotros</a></li>
                         <li><a class="robotoSemibold" href="./pages/contacto.html">Contacto</a></li>
-                        <li><a id="botonCarrito" href="./pages/carrito.html"><img src="./imgs/carritoLogo.png"
-                                    alt="Icono para acceder al carrito"></a></li>
                     </ul>
                     <ul class="navBar__links--login noBullet">
                         <li><a class="robotoSemibold" href="./pages/iniciarSesion.html"> Iniciar Sesión</a></li>
@@ -57,7 +55,7 @@
                 <button id="botonBuscador">Buscar ahora!</button>
                 <button id="botonClear">Quitar filtros</button>
             </div>
-            <div>
+            <div class="botones__filtros">
                 <button id="filtroCarne">Viandas con Carne</button>
                 <button id="filtroVegetariano">Viandas Vegetarianas</button>
                 <button id="filtroVegano">Viandas Veganas</button>
@@ -71,26 +69,29 @@
         </section>
         <section class="grid__carritoIndex grid__padding--left grid__padding--right"> <!-- Carrito interactivo -->
             <div id="carritoSection" class="carrito oculto">
-                <h4>Tu Carrito</h4>
+                <h4 class="robotoBold">Estas son las viandas que estarás disfrutando:</h4>
                 <div class="container-cart" id="carritoActivo">
                 </div>
-                <div id="carritoPrecio">
-                </div>
-                <div>
-                    <button type="button" id="carritoEmpty" class="btn btn-outline-primary">Vaciar Carrito</button>
-                    <button type="button" id="botonComprar" class="btn btn-outline-primary">Comprar Viandas</button>
+                <div class="carrito__resolve">
+                    <div id="carritoPrecio" class="grid__padding--right"></div>
+                    <button type="button" id="carritoEmpty" class="botonCarritoResolve">Vaciar Carrito</button>
+                    <button type="button" id="botonComprar" class="botonCarritoResolve">Comprar Viandas</button>
                 </div>
             </div>
         </section>
-        <section id="formCompra" class="grid__formEntrega grid__padding--left grid__padding--right oculto">
+        <section id="formCompra" class="formOculto">
             <!-- Form de entrega (B) -->
-            <h3 class="robotoBold">Completá el formulario para entregar tus productos:</h3>
+            <div class="button-container">
+                <button type="button" id="botonCerrarForm">X</button>
+            </div>
+            <h5 class=" robotoBold">¡Ya casi terminamos!</h5>
+            <p class="robotoSemibold">Completá este formulario para coordinar el pago y la entrega de tus viandas</p>
             <form id="form">
-                <h3>Formulario de Contacto</h3>
-                <label>Nombre y Apellido</label>
-                <input type="text" class="form-control" id="inputName" placeholder="Ingrese su Nombre y Apellido">
-                <label>Correo Electrónico</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese su E-mail">
+                <label class="robotoRegular">Nombre y Apellido</label>
+                <input type="text" class="form-control robotoRegular" id="inputName"
+                    placeholder="Ingrese su Nombre y Apellido">
+                <label class="robotoRegular">Correo Electrónico</label>
+                <input type="email" class="form-control robotoRegular" id="inputEmail" placeholder="Ingrese su E-mail">
                 <div class="container-form">
                     <button type="submit" class="boton__formEntrega">Comprar y Enviar Información</button>
                 </div>

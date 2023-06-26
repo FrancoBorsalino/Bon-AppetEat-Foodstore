@@ -10,7 +10,6 @@
         "section-buscador section-buscador"
         "section-recetas section-recetas"
         "section-carritoIndex section-carritoIndex"
-        "section-formEntrega section-formEntrega"
         "section-categorias section-categorias"
         "section-app section-app"
         "section-newsUno section-newsAside"
@@ -85,10 +84,6 @@
 
 .grid__carritoIndex {
     grid-area: section-carritoIndex;
-}
-
-.grid__formEntrega {
-    grid-area: section-formEntrega;
 }
 
 .grid__categorias {

@@ -1,67 +1,11 @@
-/* -------------------- DECLARACIÓN DE ARRAYS Y OBJETOS -------------------- */
-const viandasDisponibles = [
-  {
-    id: "viandaUno",
-    nombre: "Curry con Garbanzos",
-    porciones: 5,
-    precio: 16700,
-    tipo: "Vegano, Vegetariano",
-    img: "https://www.gourmet.cl/wp-content/uploads/2022/08/curry-de-garbanzos-ajustada-web-570x458.jpg",
-    cantidad: 1,
-  },
-  {
-    id: "viandaDos",
-    nombre: "Pollo con Arroz",
-    porciones: 4,
-    precio: 13200,
-    tipo: "Carne",
-    img: "https://www.cocinacaserayfacil.net/wp-content/uploads/2018/06/Arroz-blanco-con-pollo-y-verduras.jpg",
-    cantidad: 1,
-  },
-  {
-    id: "viandaTres",
-    nombre: "Milanesa con Pure",
-    porciones: 4,
-    precio: 18300,
-    tipo: "Carne",
-    img: "https://www.indega.com.py/primicia/wp-content/uploads/2022/04/pure-de-papa-con-pollo-broaster-large-qlJiPE4lyS.jpeg",
-    cantidad: 1,
-  },
-  {
-    id: "viandaCuatro",
-    nombre: "Sandwich Vegano",
-    porciones: 6,
-    precio: 14900,
-    tipo: "Vegano, Vegetariano",
-    img: "https://img.cocinarico.es/2020-09/sandwich-vegano-1.jpg",
-    cantidad: 1,
-  },
-  {
-    id: "viandaCinco",
-    nombre: "Bife con Ensalada",
-    porciones: 4,
-    precio: 1710,
-    tipo: "Carne",
-    img: "https://assets.unileversolutions.com/recipes-v2/35307.jpg",
-    cantidad: 1,
-  },
-  {
-    id: "viandaSeis",
-    nombre: "Fideos con Tuco",
-    porciones: 3,
-    precio: 12400,
-    tipo: "Vegetariano",
-    img: "https://www.diariamenteali.com/medias/receta-de-spaghetti-a-los.cuatro-quesos-1900Wx500H?context=bWFzdGVyfHJvb3R8MTkwMTY3fGltYWdlL2pwZWd8aDM2L2gyYS85MDc0MjEzNzgxNTM0L3JlY2V0YS1kZS1zcGFnaGV0dGktYS1sb3MuY3VhdHJvLXF1ZXNvc18xOTAwV3g1MDBIfDIzYTk1NGU0MDNhOTAyOWIwZjRlYzNhY2YyMzhjNmMzY2VhOTUxNjU1YWZlNzVhNTlkOWZkNTUyNGRkOGYyYzg",
-    cantidad: 1,
-  },
-];
-
 /* -------------------- DECLARACIÓN DE VARIABLES GLOBALES -------------------- */
 let totalPrecio = 0;
 let carrito = JSON.parse(localStorage.getItem("carritoLocal")) || []; // Recupero carrito de LocalStorage o declaro vacío
 
 const carritoElemento = document.querySelector("#carritoActivo");
 const totalPrecioElemento = document.querySelector("#carritoPrecio");
+
+let viandasDisponibles = [];
 
 const inputSearch = document.querySelector("#buscadorIndex");
 const buttonSearch = document.querySelector("#botonBuscador");
@@ -85,7 +29,15 @@ const inputEmail = document.querySelector("#inputEmail");
 const respuesta = document.querySelector("#respuesta");
 
 /* -------------------- INCIALIZACIÓN POR FUNCIONES -------------------- */
-mostrarVidriera(viandasDisponibles);
+
+const loadJSON = async () => {
+  const resp = await fetch("./viandas.json");
+  const data = await resp.json();
+  viandasDisponibles = data;
+  mostrarVidriera(viandasDisponibles);
+};
+
+loadJSON();
 refreshCarrito();
 
 /* -------------------- FUNCIONAMIENTO DE VIDRIERA -------------------- */
@@ -198,7 +150,7 @@ function refreshCarrito() {
     viandaCarritoElemento.innerHTML = `
     <img src="${producto.img}">
     <div class="producto">
-        <p class="robotoBold"> ${producto.nombre}</p>
+        <p class="robotoBold tituloCarrito"> ${producto.nombre}</p>
         <p class="robotoRegular">Cantidad de porciones: <b class="robotoSemibold">${
           producto.porciones * producto.cantidad
         }</b></p>
@@ -206,27 +158,33 @@ function refreshCarrito() {
           producto.precio
         }</b></p>
         <p class="robotoRegular">Tipo: ${producto.tipo}</p>
-            <p class="robotoBold">Cantidad: ${producto.cantidad}</p>
         </div>
-          <em class ="robotoSemiBold">Subtotal: $${
-            producto.cantidad * producto.precio
-          }</em>
+        <div class="carrito__interactuar">
           <div class="botonera__carrito">
-            <button tpye="button" class="less__vianda" id="sub__${
+            <button type="button" class="less__vianda boton__cantidad" id="sub__${
               producto.id
-            }">-</button>
+            }"><strong>-</strong></button>
             <button type="button" class="delete__carrito botonDeduceCarrito" id="${
               producto.id
-            }">Eliminar todas</button>
-            <button tpye="button" class="more__vianda" id="add__${
+            }">Eliminar</button>
+            <button type="button" class="more__vianda boton__cantidad" id="add__${
               producto.id
-            }">+</button>
+            }"><strong>+</strong></button>
           </div>
+          <div class="total___carrito">
+          <p><strong class="robotoBold">Cantidad: ${
+            producto.cantidad
+          }</strong></p>
+          <em class ="robotoSemiBold">Subtotal: <strong class="robotoSemibold">$${
+            producto.cantidad * producto.precio
+          }</strong></em>
+          </div>
+        </div>
         `;
     carritoElemento.appendChild(viandaCarritoElemento);
     totalPrecio += producto.precio * producto.cantidad;
   });
-  totalPrecioElemento.innerHTML = `<p class="robotoBold">Hasta ahora, acumulás un total de $${totalPrecio} en viandas!</p>`;
+  totalPrecioElemento.innerHTML = `<p class="robotoBold">El total de tu compra: <strong class="robotoSemibold">$${totalPrecio}</strong></p>`;
   refreshBotonesCarrito();
   toggleCarrito();
 }
@@ -350,36 +308,44 @@ function refreshBotonesCarrito() {
 
 /* -------------------- FUNCIONAMIENTO DEL FORMULARIO -------------------- */
 
+document.querySelector("#botonCerrarForm").addEventListener("click", () => {
+  sectionForm.classList.remove("formActivo");
+  sectionForm.classList.add("formOculto");
+  inputEmail.value = "";
+  inputName.value = "";
+  document.querySelector("#respuesta").innerHTML = "";
+});
+
 function toggleForm() {
   carrito.length === 0
-    ? (sectionForm.classList.remove("activo"),
-      sectionForm.classList.add("oculto"))
-    : (sectionForm.classList.remove("oculto"),
-      sectionForm.classList.add("activo"));
+    ? (sectionForm.classList.remove("formActivo"),
+      sectionForm.classList.add("formOculto"),
+      (inputEmail.value = ""),
+      (inputName.value = ""))
+    : (sectionForm.classList.remove("formOculto"),
+      sectionForm.classList.add("formActivo"));
   form.addEventListener("submit", infoUsuario);
 }
 
 function infoUsuario(e) {
   e.preventDefault();
   if (inputName.value === "" || inputEmail.value === "") {
-    let respuestaNo = document.createElement("div");
-    respuestaNo.innerHTML = `<h5>Asegurate de completar ambos campos para poder avanzar con tu compra!</h5>`;
-    document.querySelector("#respuesta").innerHTML = "";
-    document.querySelector("#respuesta").appendChild(respuestaNo);
+    Toastify({
+      text: "Asegurate de completar ambos campos para poder avanzar con tu compra!",
+      className: "info",
+      style: {
+        background: "linear-gradient(to right, #00645a, #00645a)",
+      },
+    }).showToast();
   } else {
-    let respuestaSi = document.createElement("div");
-    respuestaSi.innerHTML = `<h5>Gracias por elegirnos!</h5>
-    <p>Hemos enviado nuestra información de contacto para avanzar con la compra. Muchas gracias!</p>`;
-    document.querySelector("#respuesta").innerHTML = "";
-    document.querySelector("#respuesta").appendChild(respuestaSi);
     carrito = [];
     localStorage.setItem("carritoLocal", JSON.stringify(carrito));
     Swal.fire({
       imageUrl: "../imgs/logoBodyIndex.png",
       imageHeight: 150,
       imageWidth: 245,
-      title: "¡Gracias por confiar en nosotros!",
-      text: "Te estaremos contactando por mail para finalizar la compra",
+      title: `¡Gracias por confiar en nosotros ${inputName.value.toString()}!`,
+      text: `Te estaremos contactando por mail a ${inputEmail.value.toString()} para finalizar la compra`,
       confirmButtonColor: "#FF5733",
     }).then((result) => {
       if (result.isConfirmed) {

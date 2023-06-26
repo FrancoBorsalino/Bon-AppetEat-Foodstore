@@ -36,9 +36,10 @@ $color-blanco: rgb(255, 255, 255); // #ffffff
     border: none;
     border-radius: 0.375rem;
     text-align: center;
-
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
     &:hover {
         opacity: 75%;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
     }
 }
 
