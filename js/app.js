@@ -341,7 +341,7 @@ function infoUsuario(e) {
     carrito = [];
     localStorage.setItem("carritoLocal", JSON.stringify(carrito));
     Swal.fire({
-      imageUrl: "../imgs/logoBodyIndex.png",
+      imageUrl: "https://i.ibb.co/bmjmc5V/logo-Body-Index.png",
       imageHeight: 150,
       imageWidth: 245,
       title: `¡Gracias por confiar en nosotros ${inputName.value.toString()}!`,
