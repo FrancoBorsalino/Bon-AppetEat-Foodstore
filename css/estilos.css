@@ -833,6 +833,13 @@
   justify-content: space-between;
 }
 
+.recetas__cards--rec {
+  height: 220px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
 #resBuscador {
   height: 100%;
   display: flex;
@@ -1017,9 +1024,26 @@ h4 {
 }
 
 /* Cards Bootstrap */
+.card--rec {
+  max-height: 70%;
+  max-width: 15%;
+  margin: 0%;
+  padding: 0%;
+  border: none;
+}
+
 .card-img-top {
   max-height: 90px;
   object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.card-img-top__rec {
+  height: 70%;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: -0.5rem;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
