@@ -267,9 +267,12 @@ function vaciarCarrito() {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
+      for (let vianda of carrito) {
+        vianda.cantidad = 1;
+      }
       carrito = [];
-      totalPrecio = 0;
       localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+      totalPrecio = 0;
       sectionForm.classList.remove("activo");
       sectionForm.classList.add("oculto");
       Swal.fire({
